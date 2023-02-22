@@ -1,13 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/View/GuidelineView.dart';
+import 'package:gppsupporters/View/LoginScreen.dart';
+import 'package:gppsupporters/View/MedicalCalculatorView.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
+  static String id="dashboard";
 
   @override
   State<DashboardView> createState() => _DashboardViewState();
 }
 
 class _DashboardViewState extends State<DashboardView> {
+  final auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +30,16 @@ class _DashboardViewState extends State<DashboardView> {
 
         actions:  [
 
-          Container(
-              margin: EdgeInsets.only(right: 16),
-              child: Icon(Icons.account_circle_rounded, color: Colors.blue.shade900,)),
+          InkWell(
+            child: Container(
+                margin: EdgeInsets.only(right: 16),
+                child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
+
+            onTap: (){
+              auth.signOut();
+              Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
+            },
+          ),
         ],
         backgroundColor: Colors.white,
         toolbarHeight: 100,
@@ -62,7 +75,17 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                         child: Center(child: Text("Medical Calculators")),
+                         child: InkWell(
+                           onTap: ()=> Navigator.pushNamed(context, MedicalCalculatorView.id),
+                           child: Center(child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Text("Medical Calculators", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                               SizedBox(height: 15,),
+                               Image.asset('assets/img/calc.png',width: 170,height: 170,)
+                             ],
+                           )),
+                         ),
                       ),
                     ),
                   ),
@@ -78,8 +101,14 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                        child: Center(child: Text("View Profiles")),
-
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("View Profiles", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                            SizedBox(height: 15,),
+                            Image.asset('assets/img/viewprofile.png',width: 145,height: 170,)
+                          ],
+                        )),
                       ),
                     ),
                   ),
@@ -105,8 +134,17 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                        child: Center(child: Text("Guidelines")),
-
+                        child: InkWell(
+                          onTap: ()=> Navigator.pushNamed(context, GuidelineView.id),
+                          child: Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Guidelines", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                              SizedBox(height: 15,),
+                              Image.asset('assets/img/guideline3.png',width: 170,height: 170,)
+                            ],
+                          )),
+                        ),
                       ),
                     ),
                   ),
@@ -122,11 +160,18 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                        child: Center(child: Text("New Profile")),
-
+                        child: Center(child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("New Profile", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                            SizedBox(height: 15,),
+                            Image.asset('assets/img/adddoctor.png',width: 170,height: 170,)
+                          ],
+                        )),
                       ),
                     ),
                   ),
+
                 ],
               ),
             ),

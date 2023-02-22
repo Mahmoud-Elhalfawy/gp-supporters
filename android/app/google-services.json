@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "847357702740",
+    "project_id": "di-med-care-cf5bb",
+    "storage_bucket": "di-med-care-cf5bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847357702740:android:d01fb8e781a62a09b033c1",
+        "android_client_info": {
+          "package_name": "com.halfwaydevs.gppsupporters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847357702740-062b9fqp6p5bu7u714qouosqhpk6dui3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.halfwaydevs.gppsupporters",
+            "certificate_hash": "20867cecbe56e47131f1b2cc4d10919e1cc257f9"
+          }
+        },
+        {
+          "client_id": "847357702740-6kk1ifetfpnf8o2hnev79dbo0fqo75e4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABeEpxdP6eoYzPoYWCDLXwJ68yiS0yHr8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847357702740-6kk1ifetfpnf8o2hnev79dbo0fqo75e4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

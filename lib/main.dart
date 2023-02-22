@@ -1,13 +1,54 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:editable/editable.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
+import 'package:gppsupporters/View/GuidelineView.dart';
+import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(MyApp());
+import 'DatabaseUtils/keys.dart';
+import 'Model/Client.dart';
+import 'SplashScreen.dart';
+import 'View/CelebrateScreen.dart';
+import 'View/LoginScreen.dart';
+import 'View/SignupScreen.dart';
+
+void main() async{
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+
+  final database = FirebaseFirestore.instance;
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? registered = prefs.getString("register");
+  print("registered : $registered");
+  Widget screen;
+  if (!(registered == null || registered == false)) {
+    var dataStream = await database.collection(Keys.CLIENT_DB).get();
+
+
+    var snapshot = dataStream.docs.firstWhere((element) =>
+    element.get("token").toString() == registered.toString());
+    Client client = Client(name: snapshot.get("name").toString());
+    print("Client 3 : ${client.name}");
+    screen=DashboardView();
+
+
+  }else {
+    screen=LoginScreen();
+
+  }
+
+  runApp(MyApp(screen:screen));
 }
 
 class MyApp extends StatelessWidget {
+  Widget screen;
+
+  MyApp({required this.screen});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +60,27 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const DashboardView(),
+      home: SplashScreen(screen: screen,),
+        initialRoute: SplashScreen.id,
+
+        // home: SplashScreen(),
+        // initialRoute: SplashScreen.id,
+        routes: {
+
+          DashboardView.id:(context)=>DashboardView(),
+          MedicalCalculatorView.id:(context)=>MedicalCalculatorView(),
+          GuidelineView.id:(context)=>GuidelineView(),
+          //
+          LoginScreen.id:(context)=> LoginScreen(),
+          //   SplashScreen.id:(context)=>SplashScreen(),
+          SignupScreen.id:(context)=> SignupScreen(),
+          // HomeScreen.id:(context)=> HomeScreen(),
+          // //   PatientScreen.id:(context)=>PatientScreen(),
+          // //   LabTestsScreen.id:(context)=>LabTestsScreen(),
+          // //   NurseScreen.id:(context)=>NurseScreen(),
+          CelebrateScreen.id:(context)=>CelebrateScreen(),
+          //   CheckPatientScreen.id:(context)=>CheckPatientScreen(),
+        }
     );
   }
 }
