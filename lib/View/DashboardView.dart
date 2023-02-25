@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -101,14 +102,17 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                        child: Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("View Profiles", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
-                            SizedBox(height: 15,),
-                            Image.asset('assets/img/viewprofile.png',width: 145,height: 170,)
-                          ],
-                        )),
+                        child: InkWell(
+                          onTap: ()=> Navigator.pushNamed(context, ProfileScreen.id),
+                          child: Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("View Profiles", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                              SizedBox(height: 15,),
+                              Image.asset('assets/img/viewprofile.png',width: 145,height: 170,)
+                            ],
+                          )),
+                        ),
                       ),
                     ),
                   ),

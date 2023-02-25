@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.13"
+  advance_text_field:
+    dependency: "direct main"
+    description:
+      name: advance_text_field
+      sha256: "589f9393758490b5f3b91bc6118745bdb2e510694255c05834fdcfea4bcb83a5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.5"
   animated_splash_screen:
     dependency: "direct main"
     description:
@@ -225,6 +233,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  flashy_tab_bar2:
+    dependency: "direct main"
+    description:
+      name: flashy_tab_bar2
+      sha256: "895affd69b757ae2a1461ddc42a3c04954a5bb4e2292373697e40c377e836153"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -256,6 +272,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "959ef4add147753f990b4a7c6cccb746d5792dbdc81b1cde99e62e7edb31b206"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.4.0"
   hexcolor:
     dependency: "direct main"
     description:
@@ -757,6 +781,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.1"
+  toggle_switch:
+    dependency: "direct main"
+    description:
+      name: toggle_switch
+      sha256: "82c778c4bfe93af154a41e346ccd1d5b0cb6a50f8f187941412edd0a9bbf51ee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   typed_data:
     dependency: transitive
     description:

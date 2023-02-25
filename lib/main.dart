@@ -3,9 +3,11 @@ import 'package:editable/editable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
+import 'package:gppsupporters/Utils/LabsTable.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'DatabaseUtils/keys.dart';
@@ -32,7 +34,7 @@ void main() async{
 
     var snapshot = dataStream.docs.firstWhere((element) =>
     element.get("token").toString() == registered.toString());
-    Client client = Client(name: snapshot.get("name").toString());
+    Client client = Client(name: snapshot.get("name").toString(), token: snapshot.get("token").toString());
     print("Client 3 : ${client.name}");
     screen=DashboardView();
 
@@ -70,6 +72,7 @@ class MyApp extends StatelessWidget {
           DashboardView.id:(context)=>DashboardView(),
           MedicalCalculatorView.id:(context)=>MedicalCalculatorView(),
           GuidelineView.id:(context)=>GuidelineView(),
+          ProfileScreen.id:(context)=>ProfileScreen(),
           //
           LoginScreen.id:(context)=> LoginScreen(),
           //   SplashScreen.id:(context)=>SplashScreen(),

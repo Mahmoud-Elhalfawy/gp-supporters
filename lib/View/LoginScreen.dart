@@ -323,7 +323,7 @@ class _LoginScreenState extends State<LoginScreen> {
         print(dataStream.docs.first.id);
 
 
-        Client client= Client(name: snapshot.get("name").toString());
+        Client client= Client(name: snapshot.get("name").toString(), token: user.user!.uid.toString());
 
 
         print("Sign in successful");
