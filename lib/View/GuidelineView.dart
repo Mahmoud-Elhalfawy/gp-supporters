@@ -35,7 +35,7 @@ class _GuidelineViewState extends State<GuidelineView> {
 
           // Container(
           //     margin: EdgeInsets.only(right: 16),
-          //     child: Icon(Icons.account_circle_rounded, color: Colors.blue.shade900,)),
+          //     child: Icon(Icons.account_circle_rounded, color: Colors.black,)),
         ],
         backgroundColor: Colors.white,
         toolbarHeight: 70,
@@ -79,9 +79,9 @@ class _GuidelineViewState extends State<GuidelineView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                      child:  const Text("1. Cardiology ",
+                                      child:   Text("1. Cardiology ",
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -115,7 +115,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - cancer treatments and cardiovascular toxicity  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -133,7 +133,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - ventricular arrhythmias and the prevention of sudden cardiac death",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -151,7 +151,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - non-cardiac surgery: cardiovascular assessment and management",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -169,7 +169,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - diagnosis and treatment of pulmonary hypertension",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -187,7 +187,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - cardiovascular disease prevention in clinical practice ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -205,7 +205,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - valvular heart disease",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -223,7 +223,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - sports cardiology and exercise in patients with cardiovascular disease",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -241,7 +241,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - diagnosis and treatment of acute and chronic heart failure",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -259,7 +259,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - management of adult congenital heart disease",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -277,7 +277,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - diagnosis and management of atrial fibrillation",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -295,7 +295,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - management of acute coronary syndromes in patients presenting without persistent ST-segment elevation ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -312,7 +312,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - the management of patients with supraventricular tachycardia",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -328,7 +328,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - diabetes, pre-diabetes, and cardiovascular diseases",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -344,7 +344,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Corrected calcium for serum albumin conc.  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -360,7 +360,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Diagnosis -and-management-of-chronic-heart-failure ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -376,7 +376,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Digoxin dosing calculators ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -392,7 +392,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Digoxin steady state adjust  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -408,7 +408,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - estimate-24-hour-urine-protein-from-protein ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -424,7 +424,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Estimation of body fat ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -454,9 +454,9 @@ class _GuidelineViewState extends State<GuidelineView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                      child:  const Text("2. AHA Guidelines ",
+                                      child:   Text("2. AHA Guidelines ",
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -491,7 +491,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Management of Heart Failure 1 ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -506,7 +506,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Management of Heart Failure 2 ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -521,7 +521,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Blood pressure and the new hypertension guidelines ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -536,7 +536,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - on the Primary Prevention of Cardiovascular Disease ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -551,7 +551,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Infective Endocarditis in Adults Antimicrobial Therapy ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -566,7 +566,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - the Evaluation and Diagnosis of Chest Pain ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -581,7 +581,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Coronary Artery Revascularization ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -596,7 +596,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Cardiogenic Shock ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -611,7 +611,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Perioperative Cardiovascular Evaluation and Management of Patients Undergoing Noncardiac Surgery ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -626,7 +626,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Cardiac Amyloidosis",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -665,9 +665,9 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       GestureDetector(
-                                          child:  const Text("3. Hepatology - AASLD Guidelines ",
+                                          child:   Text("3. Hepatology - AASLD Guidelines ",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.blue.shade900,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
                                                 decoration: TextDecoration.underline
@@ -697,7 +697,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Hepatic encephalopathy  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -713,7 +713,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Hematemesis  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -729,7 +729,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Esophageal varices  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -745,7 +745,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Ascites and spontaneous bacterial peritonitis  ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -761,7 +761,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Hemochromatosis ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -777,7 +777,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Portal hypertension ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -793,7 +793,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - HCV infection ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -809,7 +809,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Liver transplantation in pediatric ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -825,7 +825,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:  Text(" - Hepatocellular carcinoma ",
                                         style: TextStyle(
-                                            color: Colors.blue.shade900,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 14,
                                             decoration: TextDecoration.underline
@@ -856,9 +856,9 @@ class _GuidelineViewState extends State<GuidelineView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   GestureDetector(
-                                      child:  const Text("4. Hepatology - EASL Guidelines ",
+                                      child:   Text("4. Hepatology - EASL Guidelines ",
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -891,7 +891,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Ascites, spontaneous peritonitis and hepatorenal syndrome ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -907,7 +907,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Decompensated cirrhosis ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -923,7 +923,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Hepatic encephalopathy ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -939,7 +939,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Hepatorenal cirrhosis  ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -955,7 +955,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Management of Primary Biliary Cholangitis ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -971,7 +971,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Sclerosing cholangitis ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline
@@ -987,7 +987,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:  Text(" - Haemochromatosis ",
                                             style: TextStyle(
-                                                color: Colors.blue.shade900,
+                                                color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 14,
                                                 decoration: TextDecoration.underline

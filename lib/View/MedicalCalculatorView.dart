@@ -30,7 +30,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
 
         // Container(
         //     margin: EdgeInsets.only(right: 16),
-        //     child: Icon(Icons.account_circle_rounded, color: Colors.blue.shade900,)),
+        //     child: Icon(Icons.account_circle_rounded, color: Colors.black,)),
       ],
       backgroundColor: Colors.white,
       toolbarHeight: 70,
@@ -75,7 +75,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Global Rph ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -92,7 +92,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - ASCVD risk score calculator ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -110,7 +110,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Body fluid volumes  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -128,7 +128,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Body surface area  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -146,7 +146,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Body mass index  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -164,7 +164,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - HAS-BLED score ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -182,7 +182,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Calcium /hypocalcemia treatment calculators ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -200,7 +200,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Total iron deficit  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -218,7 +218,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Child -Pugh score  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -236,7 +236,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Calcium and vitamin D requirements  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -254,7 +254,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - CHAD-VASC score  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -272,7 +272,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - CKD-EPI ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -289,7 +289,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Colistin dosing calculator ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -305,7 +305,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Creatinine clearance  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -321,7 +321,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Corrected calcium for serum albumin conc.  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -337,7 +337,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Diagnosis -and-management-of-chronic-heart-failure ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -353,7 +353,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Digoxin dosing calculators ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -369,7 +369,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Digoxin steady state adjust  ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -385,7 +385,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - estimate-24-hour-urine-protein-from-protein ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline
@@ -401,7 +401,7 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                               GestureDetector(
                                   child:  Text(" - Estimation of body fat ",
                                     style: TextStyle(
-                                        color: Colors.blue.shade900,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                         decoration: TextDecoration.underline

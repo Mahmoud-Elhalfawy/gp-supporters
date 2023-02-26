@@ -26,7 +26,7 @@ class _LabsScreenState extends State<LabsScreen> {
 
   ];
   List cols = [
-    {"title": 'Lab', 'widthFactor': 0.2, 'key': 'lab', 'editable': true},
+    {"title": 'Lab', 'widthFactor': 0.2, 'key': 'lab', 'editable': true,},
     {"title": 'Day 1', 'widthFactor': 0.2, 'key': '1'},
     {"title": '2', 'key': '2'},
     {"title": '3', 'key': '3'},
@@ -56,6 +56,7 @@ class _LabsScreenState extends State<LabsScreen> {
   void _addNewRow() {
 
     setState(() {
+
 
       _editableKey.currentState?.createRow();
       // cols.add({"title": 'added', 'widthFactor': 0.2, 'key': 'added'});
@@ -97,7 +98,7 @@ class _LabsScreenState extends State<LabsScreen> {
     dataToBackend.putIfAbsent(LabSheetKeys.labName, () => value['lab']);
 
 
-    value.keys.forEach((k) => dataToBackend.putIfAbsent(k, () => k));
+    value.keys.forEach((k) => dataToBackend.putIfAbsent(k, () => value[k]));
 
     // dataToBackend.addAll(value);
 
