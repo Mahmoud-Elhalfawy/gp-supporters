@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
       splashTransition: SplashTransition.slideTransition,
       // backgroundColor: Colors.blueGrey.shade900,
-      splashIconSize: 500,
+      splashIconSize: 200,
 
     );
 

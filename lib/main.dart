@@ -7,6 +7,7 @@ import 'package:gppsupporters/Utils/LabsTable.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/PatientsScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
           MedicalCalculatorView.id:(context)=>MedicalCalculatorView(),
           GuidelineView.id:(context)=>GuidelineView(),
           ProfileScreen.id:(context)=>ProfileScreen(),
+          PatientsScreen.id:(context)=>PatientsScreen(),
           //
           LoginScreen.id:(context)=> LoginScreen(),
           //   SplashScreen.id:(context)=>SplashScreen(),

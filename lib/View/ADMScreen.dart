@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gppsupporters/DatabaseUtils/ADMSheetKeys.dart';
 import 'package:gppsupporters/Model/Patient.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../Model/Client.dart';
+import '../Model/PatientArguments.dart';
 
 class ADMScreen extends StatefulWidget {
-  const ADMScreen({Key? key}) : super(key: key);
+  String? code;
+   ADMScreen({Key? key, required String code}) : super(key: key);
 
   @override
   State<ADMScreen> createState() => _ADMScreenState();
@@ -54,6 +57,8 @@ void clone(){
 
   @override
   Widget build(BuildContext context) {
+    print(ProfileScreen.code);
+
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection(ADMSheetKeys.table).snapshots(),
     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
@@ -65,10 +70,11 @@ void clone(){
       }
 
 
-      Map<String,dynamic> dataBackEnd= snapshot.data?.docs.lastWhere((element) => element['user']==client.token).data() as Map<String,dynamic>;
+      var checkedValue= snapshot.data?.docs.where((element) => element['user']==client.token && element['hCode']==ProfileScreen.code);
+      Map<String,dynamic> dataBackEnd=checkedValue!.isEmpty?new Map():checkedValue.first.data() as Map<String,dynamic> ;
       female=dataBackEnd['gender']=="female";
       patient.cloneData(dataBackEnd);
-      return  Container(
+      return  SizedBox(
 
         height: MediaQuery.of(context).size.height*0.9,
         child: SingleChildScrollView(

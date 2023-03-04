@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/PatientsScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 
 class DashboardView extends StatefulWidget {
@@ -103,7 +104,7 @@ class _DashboardViewState extends State<DashboardView> {
                         ),
 
                         child: InkWell(
-                          onTap: ()=> Navigator.pushNamed(context, ProfileScreen.id),
+                          onTap: ()=> Navigator.pushNamed(context, PatientsScreen.id),
                           child: Center(child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

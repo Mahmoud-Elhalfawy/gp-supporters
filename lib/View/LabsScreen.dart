@@ -76,14 +76,22 @@ class _LabsScreenState extends State<LabsScreen> {
 
   }
 
-  void save(Map<String,dynamic> dataToBackend){
-    FirebaseFirestore.instance
-        .collection(LabSheetKeys.table)
-        .add(dataToBackend);
+  Future<void> save(Map<String,dynamic> dataToBackend, AsyncSnapshot<QuerySnapshot> snapshot) async{
 
+    if(snapshot.data!.docs.where((element) => element['row']==dataToBackend['row']).isEmpty) {
+
+      print("yooh b2a , ${dataToBackend['row']}");
+      await FirebaseFirestore.instance
+          .collection(LabSheetKeys.table)
+          .add(dataToBackend);
+    }else{
+      var checkedValue=snapshot.data?.docs.firstWhere((element) =>element['user']==client.token && element['row']==dataToBackend['row']);
+      await FirebaseFirestore.instance.collection(LabSheetKeys.table).doc(checkedValue?.reference.id).update(dataToBackend);
+
+    }
   }
 
-  void cloneData(var value){
+  Future<void> cloneData(var value, AsyncSnapshot<QuerySnapshot> snapshot) async{
 
 
 
@@ -95,14 +103,16 @@ class _LabsScreenState extends State<LabsScreen> {
 
 
     dataToBackend.putIfAbsent(LabSheetKeys.user, () => client.token);
-    dataToBackend.putIfAbsent(LabSheetKeys.labName, () => value['lab']);
+    if(value['lab']!=null) {
+      dataToBackend.putIfAbsent(LabSheetKeys.labName, () => value['lab']);
+    }
 
 
     value.keys.forEach((k) => dataToBackend.putIfAbsent(k, () => value[k]));
 
     // dataToBackend.addAll(value);
 
-    save(dataToBackend);
+     await save(dataToBackend,snapshot);
 
     print("data to backend : : $dataToBackend");
 
@@ -131,8 +141,27 @@ class _LabsScreenState extends State<LabsScreen> {
             returnedRows=[];
           if(rowsBackend!=null) {
             for(var row in rowsBackend) {
-              returnedRows.add(row.data() as Map<String, dynamic>);
+
+              Map<String,dynamic> rowData=row.data() as Map<String, dynamic>;
+
+              for(var singleCol in cols){
+                if(!rowData.containsKey(singleCol['key'])){
+                  print("missing $singleCol");
+
+                  rowData.putIfAbsent(singleCol['key'], () => '-');
+                }
+              }
+
+              returnedRows.add(rowData);
             }
+
+            returnedRows.sort((a, b) {
+              if(a['row']>b['row']) {
+                return 1;
+              } else {
+                return 0;
+              }
+            });
           }
           // var c= snapshot.data?.docs.where((element) => element['token']==client.token);
 
@@ -191,16 +220,16 @@ class _LabsScreenState extends State<LabsScreen> {
                     zebraStripe: true,
                     stripeColor1: Colors.blue.shade50,
                     stripeColor2: Colors.grey.shade200,
-                    onRowSaved: (value) {
+                    onRowSaved: (value) async {
                       print(value);
-                      cloneData(value);
+                      await cloneData(value,snapshot);
                       // FirebaseFirestore.instance
                       //     .collection(LabSheetKeys.table)
                       //     .add({LabSheetKeys.user:});
                       // print(1+ value);
                     },
-                    onSubmitted: (value) {
-                      cloneData(value);
+                    onSubmitted: (value) async {
+                      await cloneData(value,snapshot);
 
                       // print(value);
                     },
