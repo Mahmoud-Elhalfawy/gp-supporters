@@ -109,7 +109,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             Container(
                                 height:20,
-                                child: Image.asset('assets/img/logo.png', fit: BoxFit.contain,))
+                                child: Image.asset('assets/img/logofinal.jpg', fit: BoxFit.contain,))
                           ],
                         )
                     ),

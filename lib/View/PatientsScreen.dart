@@ -87,7 +87,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
 
                   appBar: AppBar(
 
-                    leading: Icon(Icons.menu, color: Colors.blue.shade900,),
+                    leading: Icon(Icons.menu, color: Colors.transparent,),
                     title: Text('Patient Profiles', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(

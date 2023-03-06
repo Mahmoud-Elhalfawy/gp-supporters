@@ -8,6 +8,8 @@ import 'package:gppsupporters/Utils/LabsTable.dart';
 import 'package:gppsupporters/View/ADMScreen.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
 import 'package:gppsupporters/View/LabsScreen.dart';
+import 'package:gppsupporters/View/MedScreen.dart';
+import 'package:gppsupporters/View/VitalsScreen.dart';
 
 import '../Model/PatientArguments.dart';
 import 'LoginScreen.dart';
@@ -112,10 +114,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child:  TabBarView(
               children: [
                ADMScreen(code: ProfileScreen.code),
-                LabsScreen(title: "title"),
-                // LabsScreen(title: "title"),
-                Icon(Icons.downloading),
-                Icon(Icons.downloading),
+                LabsScreen(code: ProfileScreen.code),
+                MedScreen(code: ProfileScreen.code,),
+                VitalsScreen(code: ProfileScreen.code),
                 Icon(Icons.downloading),
                 Icon(Icons.downloading),
                 Icon(Icons.downloading),

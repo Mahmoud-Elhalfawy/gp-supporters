@@ -4,30 +4,31 @@ import 'package:editable/editable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/DatabaseUtils/LabSheetKeys.dart';
-import 'package:gppsupporters/Model/Client.dart';
 
+import '../DatabaseUtils/MedSheetKey.dart';
+import '../Model/Client.dart';
 
-class LabsScreen extends StatefulWidget {
+class MedScreen extends StatefulWidget {
+
   String code;
-
-   LabsScreen({Key? key, required this.code}) : super(key: key);
+   MedScreen({Key? key, required this.code}) : super(key: key);
 
   @override
-  State<LabsScreen> createState() => _LabsScreenState();
+  State<MedScreen> createState() => _MedScreenState();
 }
 
-class _LabsScreenState extends State<LabsScreen> {
-  /// Create a Key for EditableState
+class _MedScreenState extends State<MedScreen> {
   final _editableKey = GlobalKey<EditableState>();
-   List returnedRows=[];
+  List returnedRows=[];
   Client client= Client();
 
   List rows = [
 
   ];
   List cols = [
-    {"title": 'Lab', 'widthFactor': 0.2, 'key': 'lab', 'editable': true,},
-    {"title": 'Day 1', 'widthFactor': 0.2, 'key': '1'},
+    {"title": 'Date', 'widthFactor': 0.4, 'key': 'date', 'editable': true,},
+    {"title": 'Frequency & Dose', 'widthFactor': 0.4, 'key': '1'},
+    {"title": '1', 'key': '1'},
     {"title": '2', 'key': '2'},
     {"title": '3', 'key': '3'},
     {"title": '4', 'key': '4'},
@@ -37,16 +38,7 @@ class _LabsScreenState extends State<LabsScreen> {
     {"title": '8', 'key': '8'},
     {"title": '9', 'key': '9'},
     {"title": '10', 'key': '10'},
-    // {"title": '11', 'key': '11'},
-    // {"title": '12', 'key': '12'},
-    // {"title": '13', 'key': '13'},
-    // {"title": '14', 'key': '14'},
-    // {"title": '15', 'key': '15'},
-    // {"title": '16', 'key': '16'},
-    // {"title": '17', 'key': '17'},
-    // {"title": '18', 'key': '18'},
-    // {"title": '19', 'key': '19'},
-    // {"title": '20', 'key': '20'},
+
 
   ];
 
@@ -82,11 +74,11 @@ class _LabsScreenState extends State<LabsScreen> {
 
       print("yooh b2a , ${dataToBackend['row']}");
       await FirebaseFirestore.instance
-          .collection(LabSheetKeys.table)
+          .collection(MedSheetKey.table)
           .add(dataToBackend);
     }else{
-      var checkedValue=snapshot.data?.docs.firstWhere((element) =>element['user']==client.token && element['row']==dataToBackend['row'] && element['hCode']==widget.code);
-      await FirebaseFirestore.instance.collection(LabSheetKeys.table).doc(checkedValue?.reference.id).update(dataToBackend);
+      var checkedValue=snapshot.data?.docs.firstWhere((element) =>element['user']==client.token && element['row']==dataToBackend['row'] && element['hCode']==widget.code );
+      await FirebaseFirestore.instance.collection(MedSheetKey.table).doc(checkedValue?.reference.id).update(dataToBackend);
 
     }
   }
@@ -103,16 +95,17 @@ class _LabsScreenState extends State<LabsScreen> {
 
 
     dataToBackend.putIfAbsent(LabSheetKeys.user, () => client.token);
-    if(value['lab']!=null) {
-      dataToBackend.putIfAbsent(LabSheetKeys.labName, () => value['lab']);
-    }
-
     dataToBackend.putIfAbsent("hCode", () => widget.code);
+    // if(value['lab']!=null) {
+    //   dataToBackend.putIfAbsent(MedSheetKey.labName, () => value['lab']);
+    // }
+
+
     value.keys.forEach((k) => dataToBackend.putIfAbsent(k, () => value[k]));
 
     // dataToBackend.addAll(value);
 
-     await save(dataToBackend,snapshot);
+    await save(dataToBackend,snapshot);
 
     print("data to backend : : $dataToBackend");
 
@@ -126,26 +119,26 @@ class _LabsScreenState extends State<LabsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return StreamBuilder(
 
-        stream: FirebaseFirestore.instance.collection(LabSheetKeys.table).snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        stream: FirebaseFirestore.instance.collection(MedSheetKey.table)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
 
-          var rowsBackend= snapshot.data?.docs.where((element) => element['user']==client.token && element['hCode']==widget.code);
-            returnedRows=[];
-          if(rowsBackend!=null) {
-            for(var row in rowsBackend) {
+          var rowsBackend = snapshot.data?.docs.where((
+              element) => element['user'] == client.token && element['hCode']==widget.code);
+          returnedRows = [];
+          if (rowsBackend != null) {
+            for (var row in rowsBackend) {
+              Map<String, dynamic> rowData = row.data() as Map<String, dynamic>;
 
-              Map<String,dynamic> rowData=row.data() as Map<String, dynamic>;
-
-              for(var singleCol in cols){
-                if(!rowData.containsKey(singleCol['key'])){
+              for (var singleCol in cols) {
+                if (!rowData.containsKey(singleCol['key'])) {
                   print("missing $singleCol");
 
                   rowData.putIfAbsent(singleCol['key'], () => '-');
@@ -156,7 +149,7 @@ class _LabsScreenState extends State<LabsScreen> {
             }
 
             returnedRows.sort((a, b) {
-              if(a['row']>b['row']) {
+              if (a['row'] > b['row']) {
                 return 1;
               } else {
                 return 0;
@@ -165,7 +158,7 @@ class _LabsScreenState extends State<LabsScreen> {
           }
           // var c= snapshot.data?.docs.where((element) => element['token']==client.token);
 
-          return  SingleChildScrollView(
+          return SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -177,7 +170,9 @@ class _LabsScreenState extends State<LabsScreen> {
                   children: [
 
                     FloatingActionButton.extended(
-                      label: const Text('Add row', style: TextStyle(color: Colors.white),), // <-- Text
+                      label: const Text(
+                        'Add row', style: TextStyle(color: Colors.white),),
+                      // <-- Text
                       backgroundColor: Colors.blue.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add,
@@ -185,13 +180,14 @@ class _LabsScreenState extends State<LabsScreen> {
 
                       ),
                       onPressed: () {
-
                         _addNewRow();
                       },
                     ),
 
                     FloatingActionButton.extended(
-                      label: const Text('Add column', style: TextStyle(color: Colors.white)), // <-- Text
+                      label: const Text(
+                          'Add column', style: TextStyle(color: Colors.white)),
+                      // <-- Text
                       backgroundColor: Colors.blue.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add_box_outlined,
@@ -209,10 +205,14 @@ class _LabsScreenState extends State<LabsScreen> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(color: Colors.blue.shade900, width: 1.2)
+                      border: Border.all(
+                          color: Colors.blue.shade900, width: 1.2)
                   ),
                   // margin: EdgeInsets.only(bottom: 16),
-                  height: MediaQuery.of(context).size.height*0.6,
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.6,
                   child: Editable(
                     key: _editableKey,
                     columns: cols,
@@ -222,21 +222,22 @@ class _LabsScreenState extends State<LabsScreen> {
                     stripeColor2: Colors.grey.shade200,
                     onRowSaved: (value) async {
                       print(value);
-                      await cloneData(value,snapshot);
+                      await cloneData(value, snapshot);
                       // FirebaseFirestore.instance
-                      //     .collection(LabSheetKeys.table)
-                      //     .add({LabSheetKeys.user:});
+                      //     .collection(MedSheetKey.table)
+                      //     .add({MedSheetKey.user:});
                       // print(1+ value);
                     },
                     onSubmitted: (value) async {
-                      await cloneData(value,snapshot);
+                      await cloneData(value, snapshot);
 
                       // print(value);
                     },
                     borderColor: Colors.blueGrey,
                     tdStyle: TextStyle(fontWeight: FontWeight.bold),
                     trHeight: 80,
-                    thStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    thStyle: TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.bold),
                     thAlignment: TextAlign.center,
                     thVertAlignment: CrossAxisAlignment.end,
                     thPaddingBottom: 3,
@@ -244,7 +245,8 @@ class _LabsScreenState extends State<LabsScreen> {
                     saveIconColor: Colors.black,
                     // showCreateButton: true,
                     tdAlignment: TextAlign.center,
-                    tdEditableMaxLines: 100, // don't limit and allow data to wrap
+                    tdEditableMaxLines: 100,
+                    // don't limit and allow data to wrap
                     tdPaddingTop: 14,
                     tdPaddingBottom: 14,
                     tdPaddingLeft: 10,
@@ -257,9 +259,7 @@ class _LabsScreenState extends State<LabsScreen> {
               ],
             ),
           );
-
         });
-
-
   }
+
 }

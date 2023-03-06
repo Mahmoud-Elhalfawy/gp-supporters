@@ -1,34 +1,33 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/DashboardView.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:gppsupporters/View/PatientsScreen.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 
-import '../DatabaseUtils/keys.dart';
+import '../DatabaseUtils/ADMSheetKeys.dart';
 import '../Model/Client.dart';
-import '../Utils/CustomColors.dart';
+import '../Model/Patient.dart';
+import '../Model/PatientArguments.dart';
 import '../Utils/Strings.dart';
-import 'SignupScreen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-  static String id="login";
+class NewProfileScreen extends StatefulWidget {
+  static String id="new profile";
+  const NewProfileScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<NewProfileScreen> createState() => _NewProfileScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _NewProfileScreenState extends State<NewProfileScreen> {
   TextEditingController _nameController=new TextEditingController();
-  TextEditingController _mailController=new TextEditingController();
+  TextEditingController _patientNameController=new TextEditingController();
   TextEditingController _phoneController=new TextEditingController();
-  TextEditingController _passController=new TextEditingController();
+  TextEditingController _hCodeController=new TextEditingController();
 
   String _register_by="email";
+  Patient patient = Patient();
+  Client client= Client();
 
 
 
@@ -68,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //         Strings.login,
       //         textAlign: TextAlign.right,
       //         style:TextStyle(
-      //           
+      //
       //           fontWeight: FontWeight.bold,
       //           fontSize: 20,
       //         ),
@@ -96,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         flex: 2,
                         child: Container(
                             margin: EdgeInsets.all(8),
-                            child: Image.asset('assets/img/doctorlogin.png', fit: BoxFit.contain,))),
+                            child: Image.asset('assets/img/adddoctor.png', fit: BoxFit.contain,))),
                     Expanded(
                         flex:1,
                         child: Row(
@@ -104,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:  [
                             const Center(
-                              child: Text("Di-Med-Care", style: TextStyle(fontSize: 26),),
+                              child: Text("Add New Patient", style: TextStyle(fontSize: 26),),
                             ),
                             Container(
                                 height:20,
@@ -136,16 +135,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             children: [
                               TextFormField(
-                                controller: _mailController,
+                                controller: _patientNameController,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
-                                    Icons.mail_sharp,
+                                    Icons.account_circle,
                                     color: Colors.black,
                                   ),
                                   contentPadding: EdgeInsets.all(16),
                                   filled: true,
                                   fillColor: Colors.grey.shade100,
-                                  hintText: Strings.email,
+                                  hintText: "Enter patient name",
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.black)),
@@ -163,17 +162,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 20,
                               ),
                               TextFormField(
-                                controller: _passController,
-                                obscureText: true,
+                                controller: _hCodeController,
+                                keyboardType: TextInputType.number,
+                                obscureText: false,
                                 decoration: InputDecoration(
                                   prefixIcon: const Icon(
-                                    Icons.lock,
+                                    Icons.tag,
                                     color: Colors.black,
                                   ),
                                   contentPadding: EdgeInsets.all(16),
                                   filled: true,
                                   fillColor: Colors.grey.shade100,
-                                  hintText: Strings.password,
+                                  hintText: "Enter hospital code",
                                   enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.black)),
@@ -203,17 +203,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                     )
                                 ),
                                 onPressed: ()async{
-                                  await signin();
+                                  await addPatient();
+                                  Navigator.pushNamed(context, ProfileScreen.id, arguments: PatientArguments(patient.name!, patient.hCode!));
                                 },
                                 child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(16.0),
                                   child: Text(
-                                    Strings.login,
+                                    "Add Patient",
                                     textAlign: TextAlign.right,
                                     style:TextStyle(
                                       color: Colors.white,
-                                      
-                                      fontWeight: FontWeight.bold,
+
                                       fontSize: 20,
                                     ),
                                   ),
@@ -245,10 +245,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const Padding(
                                   padding: EdgeInsets.all(2.0),
                                   child: Text(
-                                    Strings.no_account,
+                                    "Looking for an existing patient?",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      
+
 
                                     ),
                                   ),
@@ -258,16 +258,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: TextButton(
                                     onPressed: () {
 
-                                      Navigator.pushReplacementNamed(context, SignupScreen.id);
+                                      Navigator.pushReplacementNamed(context, PatientsScreen.id);
 
 
                                     },
                                     child: const Text(
-                                      Strings.signup,
+                                      "View profiles",
                                       style: TextStyle(
                                         color: Colors.red,
                                         fontSize: 16,
-                                        
+
 
                                       ),
                                     ),
@@ -295,49 +295,26 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 
-   signin()async {
+  addPatient()async {
+    patient.name=_patientNameController.text.toString();
+    patient.hCode=_hCodeController.text.toString();
 
-    final auth = FirebaseAuth.instance;
-  final database=FirebaseFirestore.instance;
-    String username=_register_by=="email"?_mailController.text:_phoneController.text;
+    Map<String,dynamic> dataToBackend={
 
-    String password=_passController.text;
+      ADMSheetKeys.user:client.token,
 
-    try {
+      ADMSheetKeys.hcode:patient.hCode,
 
-      final user = await auth.signInWithEmailAndPassword(
-          email: username, password: password);
+      ADMSheetKeys.name:patient.name,
 
-      if (user != null) {
+    };
 
-
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        var data= await prefs.setString("register",user.user!.uid.toString());
-       var dataStream= await database.collection(Keys.CLIENT_DB).get();
-
-
-
-
-       var snapshot=dataStream.docs.firstWhere((element) => element.get("token").toString()==user.user!.uid.toString());
-
-        print(dataStream.docs.first.id);
-
-
-        Client client= Client(name: snapshot.get("name").toString(), token: user.user!.uid.toString());
-
-
-        print("Sign in successful");
-
-
-        Navigator.pushReplacementNamed(context, DashboardView.id);
-
-      }
-    }catch(e){
-      print(e);
-    }
-
-
+    await FirebaseFirestore.instance
+        .collection(ADMSheetKeys.table)
+        .add(dataToBackend);
   }
+
+
 
 
 }

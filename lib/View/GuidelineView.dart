@@ -23,7 +23,7 @@ class _GuidelineViewState extends State<GuidelineView> {
 
       appBar: AppBar(
 
-        leading: Icon(Icons.menu, color: Colors.blue.shade900,),
+        leading: Icon(Icons.menu, color: Colors.transparent,),
         title: Text('Guidelines', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
