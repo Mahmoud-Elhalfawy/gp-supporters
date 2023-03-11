@@ -4,9 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gppsupporters/Model/Patient.dart';
 import 'package:gppsupporters/Model/PatientArguments.dart';
+import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
+import 'package:gppsupporters/View/ShareScreen.dart';
 
 import '../DatabaseUtils/ADMSheetKeys.dart';
 import '../Model/Client.dart';
@@ -73,6 +76,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
           var checkedValue= snapshot.data?.docs.where((element) => element['user']==client.token);
 
           if(checkedValue!=null) {
+            patientList=[];
             for (var row in checkedValue) {
               Map<String, dynamic> rowData = row.data() as Map<String, dynamic>;
               Patient patient = Patient();
@@ -118,7 +122,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                     visible: isVisible,
                     child: FloatingActionButton(
                       onPressed: () {
-                        // Add your onPressed code here!
+                        Navigator.pushNamed(context, NewProfileScreen.id);
                       },
                       backgroundColor: Colors.blue.shade900,
                       child: const Icon(Icons.add,color: Colors.white,),
@@ -133,15 +137,32 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         return Slidable(
                           // Specify a key if the Slidable is dismissible.
                           // key: const ValueKey(0),
-
-
-                          // The end action pane is the one at the right or the bottom side.
-                          endActionPane: const ActionPane(
+                          startActionPane: const ActionPane(
                             motion: ScrollMotion(),
                             children: [
                               SlidableAction(
                                 flex: 1,
-                                onPressed: doNothing,
+                                onPressed: navigate,
+                                backgroundColor: Colors.green,
+                                foregroundColor: Colors.white,
+                                icon: Icons.share,
+                                label: 'Share',
+                              ),
+
+                            ],
+                          ),
+
+
+                          // The end action pane is the one at the right or the bottom side.
+                          endActionPane:  ActionPane(
+                            motion: ScrollMotion(),
+                            children: [
+                              SlidableAction(
+                                flex: 1,
+                                onPressed:(context){
+                                  deletePatient(snapshot, patientList[index].hCode!);
+                                  showToast("Patient successfully deleted");
+                                },
                                 backgroundColor: Color(0xFFFE4A49),
                                 foregroundColor: Colors.white,
                                 icon: Icons.delete,
@@ -189,6 +210,32 @@ class _PatientsScreenState extends State<PatientsScreen> {
     );
 
   }
+
+
+  void deletePatient(AsyncSnapshot<QuerySnapshot> snapshot, String hCode)async{
+    var checkedValue=snapshot.data?.docs.firstWhere((element) =>element['user']==client.token && element['hCode']==hCode);
+    await FirebaseFirestore.instance.collection(ADMSheetKeys.table).doc(checkedValue?.reference.id).delete();
+    setState(() {
+
+    });
+  }
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white
+    );
+  }
+
 }
 
-void doNothing(BuildContext context) {}
+void doNothing(BuildContext context, var snapshot) {}
+void navigate(BuildContext context) {
+
+  Navigator.pushNamed(context, ShareScreen.id);
+}
+

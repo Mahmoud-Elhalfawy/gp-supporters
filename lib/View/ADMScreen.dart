@@ -1,6 +1,7 @@
 import 'package:advance_text_field/advance_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gppsupporters/DatabaseUtils/ADMSheetKeys.dart';
 import 'package:gppsupporters/Model/Patient.dart';
@@ -11,8 +12,8 @@ import '../Model/Client.dart';
 import '../Model/PatientArguments.dart';
 
 class ADMScreen extends StatefulWidget {
-  String? code;
-   ADMScreen({Key? key, required String code}) : super(key: key);
+  String code;
+   ADMScreen({Key? key, required this.code}) : super(key: key);
 
   @override
   State<ADMScreen> createState() => _ADMScreenState();
@@ -25,32 +26,70 @@ class _ADMScreenState extends State<ADMScreen> {
 
 
 
-  void save(Map<String,dynamic> dataToBackend) {
-    FirebaseFirestore.instance
-        .collection(ADMSheetKeys.table)
-        .add(dataToBackend);
+  void save(Map<String,dynamic> dataToBackend, AsyncSnapshot<QuerySnapshot> snapshot) async {
+
+
+    if(snapshot.data!.docs.where((element) =>element['user']==client.token && element['hCode']==widget.code).isEmpty) {
+      print("new time ${widget.code}");
+      FirebaseFirestore.instance
+          .collection(ADMSheetKeys.table)
+          .add(dataToBackend);
+    }else{
+      var checkedValue=snapshot.data?.docs.firstWhere((element) =>element['user']==client.token && element['hCode']==widget.code);
+      await FirebaseFirestore.instance.collection(ADMSheetKeys.table).doc(checkedValue?.reference.id).update(dataToBackend);
+
+    }
+
   }
 
-void clone(){
-  Map<String,dynamic> dataToBackend={
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white
+    );
+  }
 
-    ADMSheetKeys.user:client.token,
-    ADMSheetKeys.age:patient.age,
-    ADMSheetKeys.allergy:patient.allergy,
-    ADMSheetKeys.coa:patient.coa,
-    ADMSheetKeys.drugHx:patient.drugHx,
+  void clone( AsyncSnapshot<QuerySnapshot> snapshot) {
+
+    print("patient hcode : ${patient.hCode}");
+    if (patient.hCode!.isEmpty){
+      showToast("please enter hospital code");
+    return;
+  }
+  Map<String,dynamic> dataToBackend={
     ADMSheetKeys.hcode:patient.hCode,
-    ADMSheetKeys.height:patient.height,
-    ADMSheetKeys.medHx:patient.medHx,
-    ADMSheetKeys.name:patient.name,
-    ADMSheetKeys.surgicalHx:patient.surgicalHx,
-    ADMSheetKeys.weight:patient.weight,
-    ADMSheetKeys.workingUpDiagnosis:patient.workingUpDiagnosis,
-    ADMSheetKeys.physicalAssessment:patient.physicalAssesment,
+    ADMSheetKeys.user:client.token,
+
+
+    if(patient.age!=null)
+      ADMSheetKeys.age:patient.age,
+    if(patient.allergy!=null)
+      ADMSheetKeys.allergy:patient.allergy,
+    if(patient.coa!=null)
+      ADMSheetKeys.coa:patient.coa,
+    if(patient.drugHx!=null)
+      ADMSheetKeys.drugHx:patient.drugHx,
+    if(patient.height!=null)
+      ADMSheetKeys.height:patient.height,
+    if(patient.medHx!=null)
+      ADMSheetKeys.medHx:patient.medHx,
+    if(patient.name!=null)
+      ADMSheetKeys.name:patient.name,
+    if(patient.surgicalHx!=null)
+      ADMSheetKeys.surgicalHx:patient.surgicalHx,
+    if(patient.weight!=null)
+      ADMSheetKeys.weight:patient.weight,
+    if(patient.workingUpDiagnosis!=null)
+      ADMSheetKeys.workingUpDiagnosis:patient.workingUpDiagnosis,
+    if(patient.physicalAssesment!=null)
+      ADMSheetKeys.physicalAssessment:patient.physicalAssesment,
   };
 
-
-  save(dataToBackend);
+    save(dataToBackend,snapshot);
 
 }
 
@@ -71,7 +110,7 @@ void clone(){
 
 
       var checkedValue= snapshot.data?.docs.where((element) => element['user']==client.token && element['hCode']==ProfileScreen.code);
-      Map<String,dynamic> dataBackEnd=checkedValue!.isEmpty?new Map():checkedValue.first.data() as Map<String,dynamic> ;
+      Map<String,dynamic> dataBackEnd=checkedValue!.isEmpty?Map():checkedValue.first.data() as Map<String,dynamic> ;
       female=dataBackEnd['gender']=="female";
       patient.cloneData(dataBackEnd);
       return  SizedBox(
@@ -92,7 +131,7 @@ void clone(){
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  clone();
+                  clone(snapshot);
                 },
               ),
               const SizedBox(

@@ -26,7 +26,7 @@ class _MedScreenState extends State<MedScreen> {
 
   ];
   List cols = [
-    {"title": 'Date', 'widthFactor': 0.4, 'key': 'date', 'editable': true,},
+    {"title": 'Drug', 'widthFactor': 0.4, 'key': 'drug', 'editable': true,},
     {"title": 'Frequency & Dose', 'widthFactor': 0.4, 'key': '1'},
     {"title": '1', 'key': '1'},
     {"title": '2', 'key': '2'},

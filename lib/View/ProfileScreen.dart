@@ -9,6 +9,7 @@ import 'package:gppsupporters/View/ADMScreen.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
 import 'package:gppsupporters/View/LabsScreen.dart';
 import 'package:gppsupporters/View/MedScreen.dart';
+import 'package:gppsupporters/View/OncoScreen.dart';
 import 'package:gppsupporters/View/VitalsScreen.dart';
 
 import '../Model/PatientArguments.dart';
@@ -117,7 +118,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 LabsScreen(code: ProfileScreen.code),
                 MedScreen(code: ProfileScreen.code,),
                 VitalsScreen(code: ProfileScreen.code),
-                Icon(Icons.downloading),
+                OncoScreen(code: ProfileScreen.code),
+
                 Icon(Icons.downloading),
                 Icon(Icons.downloading),
                 Icon(Icons.downloading),

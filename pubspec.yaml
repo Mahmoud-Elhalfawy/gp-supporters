@@ -70,6 +70,7 @@ dependencies:
   toggle_switch: ^2.0.1
   font_awesome_flutter: ^10.4.0
   flutter_slidable: ^2.0.0
+  fluttertoast: ^8.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
