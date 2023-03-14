@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/View/DDIScreen.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
@@ -51,137 +52,190 @@ class _DashboardViewState extends State<DashboardView> {
 
       body: SafeArea(
         child: Center(
-          child: Column(
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8),
+            child: Column(
 
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
 
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Material(
-                    elevation: 10,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-
-                     child: Container(
-                       width: 160,
-                      height: 230,
-                      decoration: BoxDecoration(
-
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
-
-                       child: InkWell(
-                         onTap: ()=> Navigator.pushNamed(context, MedicalCalculatorView.id),
-                         child: Center(child: Column(
-                           mainAxisAlignment: MainAxisAlignment.center,
-                           children: [
-                             Container(margin:EdgeInsets.only(top: 10),child: Text("Medical Calculators", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
-                             SizedBox(height: 15,),
-                             Image.asset('assets/img/calc.png',width: 150,height: 150,)
-                           ],
-                         )),
-                       ),
-                    ),
-                  ),
-                  SizedBox(width: 20,),
-                  Material(
-                    elevation: 10,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-
-                    child: Container(
-                      width: 160,
-                      height: 230,
-                      padding: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(
-
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
-
-                      child: InkWell(
-                        onTap: ()=> Navigator.pushNamed(context, PatientsScreen.id),
-                        child: Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(margin:EdgeInsets.only(top: 10),child: Text("View Profiles", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
-                            SizedBox(height: 15,),
-                            Image.asset('assets/img/viewprofile.png',width: 145,height: 150,)
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 30,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Material(
-                    elevation: 10,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-
-                    child: Container(
-                      width: 160,
-                      height: 230,
-                      decoration: BoxDecoration(
-
-                          borderRadius: BorderRadius.all(Radius.circular(20))
-                      ),
-
-                      child: InkWell(
-                        onTap: ()=> Navigator.pushNamed(context, GuidelineView.id),
-                        child: Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(margin:EdgeInsets.only(top: 10),child: Text("Guidelines", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
-                            SizedBox(height: 15,),
-                            Image.asset('assets/img/guideline3.png',width: 150,height: 150,)
-                          ],
-                        )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20,),
-                  InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(context, NewProfileScreen.id);
-                    },
-                    child: Material(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Material(
                       elevation: 10,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
 
-                      child: Container(
-                        width: 160,
-                        height: 230,
+                       child: Container(
+                         width: 160,
+                        height: 210,
                         decoration: BoxDecoration(
 
                             borderRadius: BorderRadius.all(Radius.circular(20))
                         ),
 
-                        child: Center(child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(margin:EdgeInsets.only(top: 10),child: Text("New Profile", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
-                            SizedBox(height: 15,),
-                            Image.asset('assets/img/adddoctor.png',width: 150,height: 150,)
-                          ],
-                        )),
+                         child: InkWell(
+                           onTap: ()=> Navigator.pushNamed(context, MedicalCalculatorView.id),
+                           child: Center(child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Container(margin:EdgeInsets.only(top: 10),child: Text("Medical Calculators", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
+                               SizedBox(height: 15,),
+                               Image.asset('assets/img/calc.png',width: 145,height: 145,)
+                             ],
+                           )),
+                         ),
                       ),
                     ),
-                  ),
+                    SizedBox(width: 20,),
+                    Material(
+                      elevation: 10,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
 
-                ],
-              ),
+                      child: Container(
+                        width: 160,
+                        height: 210,
+                        padding: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
 
-            ],
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+
+                        child: InkWell(
+                          onTap: ()=> Navigator.pushNamed(context, PatientsScreen.id),
+                          child: Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(margin:EdgeInsets.only(top: 10),child: Text("View Profiles", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
+                              SizedBox(height: 15,),
+                              Image.asset('assets/img/viewprofile.png',width: 145,height: 145,)
+                            ],
+                          )),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        
+                        Navigator.pushNamed(context, DDIScreen.id);
+                      },
+                      child: Column(
+                        children: [
+                          Text("DDI", style: TextStyle(color: Colors.black, fontSize: 20),),
+                          Image.asset('assets/img/drug.png',width: 45,height: 45,)
+                          ,
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(130,110),
+                        maximumSize: Size(130,110),
+
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(20),
+                        backgroundColor: Colors.white, // <-- Button color
+                        foregroundColor: Colors.blue.shade900, // <-- Splash color
+                      ),
+                    ),
+
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: [
+                          Text("About us", style: TextStyle(color: Colors.black, fontSize: 20),),
+                          Image.asset('assets/img/working.png',width: 45,height: 45,)
+                          ,
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(130,110),
+                        maximumSize: Size(130,110),
+
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(20),
+                        backgroundColor: Colors.white, // <-- Button color
+                        foregroundColor: Colors.blue.shade900, // <-- Splash color
+                      ),
+                    ),
+
+
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Material(
+                      elevation: 10,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+
+                      child: Container(
+                        width: 160,
+                        height: 210,
+                        decoration: BoxDecoration(
+
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+
+                        child: InkWell(
+                          onTap: ()=> Navigator.pushNamed(context, GuidelineView.id),
+                          child: Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(margin:EdgeInsets.only(top: 10),child: Text("Guidelines", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
+                              SizedBox(height: 15,),
+                              Image.asset('assets/img/guideline3.png',width: 145,height: 145,)
+                            ],
+                          )),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20,),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushNamed(context, NewProfileScreen.id);
+                      },
+                      child: Material(
+                        elevation: 10,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+
+                        child: Container(
+                          width: 160,
+                          height: 210,
+                          decoration: BoxDecoration(
+
+                              borderRadius: BorderRadius.all(Radius.circular(20))
+                          ),
+
+                          child: Center(child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(margin:EdgeInsets.only(top: 10),child: Text("New Profile", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),)),
+                              SizedBox(height: 15,),
+                              Image.asset('assets/img/adddoctor.png',width: 145,height: 145,)
+                            ],
+                          )),
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+
+              ],
+            ),
           ),
         ),
       ),

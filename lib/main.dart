@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
 import 'package:gppsupporters/Utils/LabsTable.dart';
+import 'package:gppsupporters/View/DDIScreen.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/MedicalCalculatorView.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.id:(context)=> LoginScreen(),
           SignupScreen.id:(context)=> SignupScreen(),
           ShareScreen.id:(context)=>ShareScreen(),
+          DDIScreen.id:(context)=>DDIScreen(),
           CelebrateScreen.id:(context)=>CelebrateScreen(),
           //   CheckPatientScreen.id:(context)=>CheckPatientScreen(),
         }
