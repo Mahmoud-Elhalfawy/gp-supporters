@@ -325,7 +325,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
         Client client= Client(name: snapshot.get("name").toString(), token: user.user!.uid.toString());
 
-
         print("Sign in successful");
 
 

@@ -35,7 +35,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
 
   ];
   List cols = [
-    {"title": 'Date', 'widthFactor': 0.4, 'key': 'date', 'editable': true,},
+    {"title": 'Date', 'widthFactor': 0.2, 'key': 'date', 'editable': true,},
     {"title": 'BP (60/90 -> 120/80 )', 'widthFactor': 0.4, 'key': 'bp'},
     {"title": 'HR (60 To 100)', 'widthFactor': 0.4,'key': 'hr'},
     {"title": 'Temperature (36.5°C to 37.3°C)' ,'widthFactor': 0.4, 'key': 'temp'},
@@ -50,6 +50,8 @@ class _VitalsScreenState extends State<VitalsScreen> {
   ];
 
   List colsABG = [
+    {"title": 'Date', 'widthFactor': 0.2, 'key': 'date', 'editable': true,},
+
     {"title": 'PH (7.35-7.45)', 'widthFactor': 0.4, 'key': 'ph', 'editable': true,},
     {"title": 'PO2 (75-100 mmHg)', 'widthFactor': 0.4, 'key': 'po2'},
     {"title": 'PCO2 (35-45 mmHG)', 'widthFactor': 0.4,'key': 'pco2'},
@@ -61,7 +63,7 @@ class _VitalsScreenState extends State<VitalsScreen> {
   ];
 
   List colsCulture = [
-    {"title": 'Date', 'widthFactor': 0.4, 'key': 'date', 'editable': true,},
+    {"title": 'Date', 'widthFactor': 0.2, 'key': 'date', 'editable': true,},
     {"title": 'Culture type', 'widthFactor': 0.4, 'key': 'culturet'},
     {"title": 'Organism', 'widthFactor': 0.4,'key': 'organsim'},
     {"title": 'Antibiogram' ,'widthFactor': 0.4, 'key': 'antibiogram'},

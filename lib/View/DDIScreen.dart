@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'CardView.dart';
 import 'LoginScreen.dart';
@@ -121,10 +122,12 @@ class _DDIScreenState extends State<DDIScreen> {
                   Icons.output_sharp,
                   color: Colors.blue.shade900,
                 )),
-            onTap: () {
+            onTap: ()async {
               final auth = FirebaseAuth.instance;
 
               auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
               Navigator.pushNamedAndRemoveUntil(
                   context, LoginScreen.id, (route) => false);
             },

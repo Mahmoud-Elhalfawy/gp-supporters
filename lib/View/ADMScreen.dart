@@ -427,42 +427,28 @@ class _ADMScreenState extends State<ADMScreen> {
                                 SizedBox(
                                   height: 15,
                                 ),
-
-                                TextField(
-                                  textAlign: TextAlign.center,
-
-                                  onChanged: (query) {
-                                    patient.surgicalHx = query;
+                                AdvanceTextField(
+                                  text: dataBackEnd['surgicalHx'],
+                                  animationDuration:
+                                  Duration(milliseconds: 200),
+                                  backgroundColor: Colors.blue.shade900,
+                                  type: AdvanceTextFieldType.EDIT,
+                                  editLabel: Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
+                                  saveLabel: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  ),
+                                  textHint: 'enter surgical Hx',
+                                  onEditTap: () {},
+                                  onSaveTap: (text) {
+                                    print('value is: $text');
+                                    patient.surgicalHx = text;
                                   },
-
-                                  keyboardType: TextInputType.multiline,
-                                  minLines: 1,//Normal textInputField will be displayed
-                                  maxLines: 10,// when user presses enter it will adapt to it
-                                  // controller: _controller,
-                                  decoration: InputDecoration(
-
-                                      label:dataBackEnd['surgicalHx']!=null? Center(
-                                        child: Text(dataBackEnd['surgicalHx']),
-                                      ):null,
-
-                                      alignLabelWithHint: true,
-
-                                      // suffixIconColor: Colors.white,
-                                      hintText: 'enter surgical Hx',
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      fillColor: Colors.white,
-                                      contentPadding: const EdgeInsets.symmetric(
-                                          vertical: 50.0, horizontal: 5),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
-                                      ),
-
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
-                                      )),
                                 ),
+
 
                               ],
                             ),
@@ -533,27 +519,44 @@ class _ADMScreenState extends State<ADMScreen> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                AdvanceTextField(
-                                  text: dataBackEnd['drugHx'],
-                                  animationDuration:
-                                      Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
-                                  type: AdvanceTextFieldType.EDIT,
-                                  editLabel: Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                  ),
-                                  saveLabel: Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  ),
-                                  textHint: 'enter Drug Hx',
-                                  onEditTap: () {},
-                                  onSaveTap: (text) {
-                                    print('value is: $text');
-                                    patient.drugHx = text;
+
+                                TextField(
+                                  textAlign: TextAlign.center,
+
+                                  onChanged: (query) {
+                                    patient.drugHx = query;
                                   },
-                                )
+
+                                  keyboardType: TextInputType.multiline,
+                                  minLines: 1,//Normal textInputField will be displayed
+                                  maxLines: 10,// when user presses enter it will adapt to it
+                                  // controller: _controller,
+                                  decoration: InputDecoration(
+
+                                      label: dataBackEnd['drugHx']!=null? Center(
+                                        child: Text(dataBackEnd['drugHx']),
+                                      ):null,
+
+                                      alignLabelWithHint: true,
+
+                                      // suffixIconColor: Colors.white,
+                                      hintText: 'enter drug Hx',
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      fillColor: Colors.white,
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 50.0, horizontal: 5),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                      ),
+
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                      )),
+                                ),
+
+
                               ],
                             ),
                             SizedBox(
@@ -649,28 +652,45 @@ class _ADMScreenState extends State<ADMScreen> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                AdvanceTextField(
-                                  text: dataBackEnd['physicalAssessment'],
-                                  animationDuration:
-                                      Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
-                                  type: AdvanceTextFieldType.EDIT,
-                                  keyboardType: TextInputType.multiline,
-                                  editLabel: Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                  ),
-                                  saveLabel: Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                  ),
-                                  textHint: 'enter physical assesment',
-                                  onEditTap: () {},
-                                  onSaveTap: (text) {
-                                    print('value is: $text');
-                                    patient.physicalAssesment = text;
+
+                                TextField(
+                                  textAlign: TextAlign.center,
+
+                                  onChanged: (query) {
+                                    patient.physicalAssesment = query;
                                   },
-                                )
+
+                                  keyboardType: TextInputType.multiline,
+                                  minLines: 1,//Normal textInputField will be displayed
+                                  maxLines: 10,// when user presses enter it will adapt to it
+                                  // controller: _controller,
+                                  decoration: InputDecoration(
+
+                                      label: dataBackEnd['physicalAssessment']!=null? Center(
+                                        child: Text(dataBackEnd['physicalAssessment']),
+                                      ):null,
+
+                                      alignLabelWithHint: true,
+
+                                      // suffixIconColor: Colors.white,
+                                      hintText: 'enter physical Assessment',
+                                      hintStyle: TextStyle(color: Colors.grey),
+                                      fillColor: Colors.white,
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 50.0, horizontal: 5),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                      ),
+
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                      )),
+                                ),
+
+
+
                               ],
                             ),
                             SizedBox(

@@ -11,6 +11,7 @@ import 'package:gppsupporters/Model/PatientArguments.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:gppsupporters/View/ShareScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../DatabaseUtils/ADMSheetKeys.dart';
 import '../Model/Client.dart';
@@ -206,10 +207,12 @@ class _PatientsScreenState extends State<PatientsScreen> {
                         Icons.output_sharp,
                         color: Colors.blue.shade900,
                       )),
-                  onTap: () {
+                  onTap: () async{
                     final auth = FirebaseAuth.instance;
 
                     auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
                     Navigator.pushNamedAndRemoveUntil(
                         context, LoginScreen.id, (route) => false);
                   },
@@ -222,6 +225,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
             floatingActionButton: Visibility(
               visible: isVisible,
               child: FloatingActionButton(
+                heroTag: "addbtn",
                 onPressed: () {
                   Navigator.pushNamed(context, NewProfileScreen.id);
                 },

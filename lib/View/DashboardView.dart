@@ -7,6 +7,7 @@ import 'package:gppsupporters/View/MedicalCalculatorView.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/PatientsScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -39,8 +40,10 @@ class _DashboardViewState extends State<DashboardView> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
 
-            onTap: (){
+            onTap: ()async{
               auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
               Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
             },
           ),

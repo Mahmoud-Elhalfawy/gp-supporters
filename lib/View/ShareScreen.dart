@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../DatabaseUtils/ADMSheetKeys.dart';
 import '../DatabaseUtils/keys.dart';
@@ -101,10 +102,12 @@ class _ShareScreenState extends State<ShareScreen> {
                       margin: EdgeInsets.only(right: 16),
                       child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
 
-                  onTap: (){
+                  onTap: ()async{
                     final auth = FirebaseAuth.instance;
 
                     auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
                     Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
                   },
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/View/CardView.dart';
 import 'package:link_text/link_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'LoginScreen.dart';
@@ -124,10 +125,12 @@ class _MedicalCalculatorViewState extends State<MedicalCalculatorView> {
                   Icons.output_sharp,
                   color: Colors.blue.shade900,
                 )),
-            onTap: () {
+            onTap: () async{
               final auth = FirebaseAuth.instance;
 
               auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
               Navigator.pushNamedAndRemoveUntil(
                   context, LoginScreen.id, (route) => false);
             },

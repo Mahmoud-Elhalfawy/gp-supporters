@@ -13,6 +13,7 @@ import 'package:gppsupporters/View/MedScreen.dart';
 import 'package:gppsupporters/View/NotesScreen.dart';
 import 'package:gppsupporters/View/OncoScreen.dart';
 import 'package:gppsupporters/View/VitalsScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/PatientArguments.dart';
 import 'LoginScreen.dart';
@@ -59,8 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     margin: EdgeInsets.only(right: 16),
                     child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
 
-                onTap: (){
+                onTap: ()async{
                   auth.signOut();
+SharedPreferences preferences = await SharedPreferences.getInstance();
+await preferences.clear();
                   Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
                 },
               ),
