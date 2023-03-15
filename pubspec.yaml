@@ -72,6 +72,9 @@ dependencies:
   flutter_slidable: ^2.0.0
   fluttertoast: ^8.2.1
   flutter_switch: ^0.3.2
+  syncfusion_flutter_xlsio: ^20.4.54-beta
+  file_saver: ^0.1.1
+  permission_handler: ^10.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

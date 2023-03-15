@@ -33,4 +33,23 @@ class Patient{
     physicalAssesment=data['physicalAssessment'];
 
   }
+
+  Map<String,dynamic>  originateData(){
+    Map<String,dynamic> data={};
+    data['name']=name;
+    data['hCode']=hCode;
+    data['gender']=gender;
+    data['height']=height;
+    data['age']=age;
+    data['weight']=weight;
+    data['coa']=coa;
+    data['surgicalHx']=surgicalHx;
+    data['medHx']=medHx;
+    data['drugHx']=drugHx;
+    data['allergy']=allergy;
+    data['workingUpDiagnosis']=workingUpDiagnosis;
+    data['physicalAssessment']=physicalAssesment;
+
+    return data;
+  }
 }

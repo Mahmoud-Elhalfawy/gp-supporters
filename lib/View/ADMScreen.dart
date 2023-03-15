@@ -1,12 +1,21 @@
+import 'dart:io';
+
 import 'package:advance_text_field/advance_text_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_saver/file_saver.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gppsupporters/DatabaseUtils/ADMSheetKeys.dart';
 import 'package:gppsupporters/Model/Patient.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
+
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 import '../Model/Client.dart';
 import '../Model/PatientArguments.dart';
@@ -23,6 +32,70 @@ class _ADMScreenState extends State<ADMScreen> {
   bool female = true;
   Patient patient = Patient();
   Client client = Client();
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<File> get _getLocalFile async {
+    final path = await _localPath;
+    print("path is $path");
+    return File(path + '/admsheetTrial2.xlsx');
+  }
+
+  Future<void> generateExcel(AsyncSnapshot<QuerySnapshot> snapshot) async
+  {
+    Map<String,dynamic> data=patient.originateData();
+    print(data.values);
+    int row=1;
+    int col=1;
+    //Create a Excel document.
+    //Creating a workbook.
+    final Excel.Workbook workbook = Excel.Workbook();
+    //Accessing via index.
+    final Excel.Worksheet sheet = workbook.worksheets[0];
+    // Set the text value.
+    for(String key in data.keys) {
+      sheet.getRangeByIndex(row, col).setText(key);
+      sheet.getRangeByIndex(row+1, col).setText(data[key]!=null?data[key]:"-");
+      col++;
+    }
+
+
+    if (!kIsWeb) {
+      if (Platform.isIOS ||
+          Platform.isAndroid ||
+          Platform.isMacOS) {
+        bool status = await Permission.storage.isGranted;
+
+        if (!status) await Permission.storage.request();
+      }
+    }
+
+
+
+      showToast("Admission sheet saved succesfully");
+
+
+
+    List<int> sheets = workbook.saveAsStream();
+
+    workbook.dispose();
+    Uint8List dataList = Uint8List.fromList(sheets);
+    MimeType type = MimeType.MICROSOFTEXCEL;
+    String path = await FileSaver.instance.saveAs(
+        "AdmSheet - ${patient.hCode}",
+        dataList,
+        "xlsx",
+        type);
+    print(path);
+
+
+
+
+  }
+
 
   void save(Map<String, dynamic> dataToBackend,
       AsyncSnapshot<QuerySnapshot> snapshot) async {
@@ -82,6 +155,8 @@ class _ADMScreenState extends State<ADMScreen> {
     save(dataToBackend, snapshot);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     print(ProfileScreen.code);
@@ -110,20 +185,47 @@ class _ADMScreenState extends State<ADMScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  FloatingActionButton.extended(
-                    label: const Text(
-                      'Save',
-                      style: TextStyle(color: Colors.white),
-                    ), // <-- Text
-                    backgroundColor: Colors.blue.shade900,
-                    icon: const Icon(
-                      // <-- Icon
-                      Icons.save,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      clone(snapshot);
-                    },
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    children: [
+                      FloatingActionButton(
+                        // label: const Text(
+                        //   'Save',
+                        //   style: TextStyle(color: Colors.white),
+                        // ), // <-- Text
+                        backgroundColor: Colors.blue.shade900,
+                        child: const Icon(
+                          // <-- Icon
+                          Icons.save,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          clone(snapshot);
+                        },
+                      ),
+                      SizedBox(width: 20,),
+                      FloatingActionButton(
+                        // label: const Text(
+                        //   'Save',
+                        //   style: TextStyle(color: Colors.white),
+                        // ), // <-- Text
+                        backgroundColor: Colors.green.shade900,
+                        child: const Icon(
+                          // <-- Icon
+                          Icons.print,
+                          color: Colors.white,
+                        ),
+                        onPressed: ()async {
+                          final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+                          if(action==ConfirmAction.Accept){
+                            await generateExcel(snapshot);
+                          }
+                        },
+                      ),
+
+                    ],
                   ),
                   const SizedBox(
                     height: 15,
@@ -707,4 +809,36 @@ class _ADMScreenState extends State<ADMScreen> {
           );
         });
   }
+
 }
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Generating excel sheet'),
+        content: const Text(
+            'This will generate excel sheet for admission sheet of patient'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+
