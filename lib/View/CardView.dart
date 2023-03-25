@@ -5,7 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 class CardView extends StatefulWidget {
   String title;
   String url;
-   CardView({Key? key,required this.title,required this.url}) : super(key: key);
+  String? icon;
+   CardView({Key? key,required this.title,required this.url, this.icon}) : super(key: key);
 
   @override
   State<CardView> createState() => _CardViewState();
@@ -23,7 +24,7 @@ class _CardViewState extends State<CardView> {
           // The child of the Slidable is what the user sees when the
           // component is not dragged.
           child: SizedBox(
-            height: 80,
+            height: 100,
             child: InkWell(
               onTap: () {
                 launchUrl(Uri.parse(widget.url),mode: LaunchMode.externalApplication);
@@ -33,22 +34,19 @@ class _CardViewState extends State<CardView> {
                     borderRadius:
                     const BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
-                      color: Colors.blue.shade900,
+                      color: Colors.indigo.shade900,
                     ),
                   ),
                   child: ListTile(
                     leading: Container(
                         padding: EdgeInsets.all(8),
                         child: Image.asset(
-                          'assets/img/document1.png',
+                          widget.icon??'assets/img/document1.png',
                           height: 50,
                         )),
                     title: Text(
                         widget.title),
-                    subtitle: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('press to go to link'),
-                    ),
+
                   )),
             ),
           ),

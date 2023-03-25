@@ -59,8 +59,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
   List<Patient> patientListFiltered = List.empty(growable: true);
 
   bool search = false;
-  bool searchCriteria=true;
-  String query="";
+  bool searchCriteria = true;
+  String query = "";
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -91,16 +91,16 @@ class _PatientsScreenState extends State<PatientsScreen> {
               ? {}
               : checkedValue.first.data() as Map<String, dynamic>;
 
-          if(!search) {
-            patientListFiltered=patientList;
+          if (!search) {
+            patientListFiltered = patientList;
           }
           return Scaffold(
             backgroundColor: Colors.grey.shade200,
             appBar: AppBar(
-             automaticallyImplyLeading: false,
+              automaticallyImplyLeading: false,
               title: search
                   ? Container(
-                width: 900,
+                      width: 900,
                       color: Colors.white,
                       margin: EdgeInsets.all(5),
                       child: Padding(
@@ -114,9 +114,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               activeText: "name",
                               inactiveText: "code",
                               showOnOff: true,
-                              // activeTextColor: Colors.blue.shade900,
+                              // activeTextColor: Colors.indigo.shade900,
                               // inactiveTextColor: Colors.green.shade900,
-                              activeColor: Colors.blue.shade900,
+                              activeColor: Colors.indigo.shade900,
                               inactiveColor: Colors.green.shade900,
                               value: searchCriteria,
                               onToggle: (val) {
@@ -125,28 +125,28 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                 });
                               },
                             ),
-                            SizedBox(width: 10,),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Flexible(
                               child: TextField(
-
                                 onChanged: (query) {
                                   setState(() {
-                                    this.query=query;
-                                    if(query.isEmpty) {
-                                      patientListFiltered=patientList;
+                                    this.query = query;
+                                    if (query.isEmpty) {
+                                      patientListFiltered = patientList;
                                     } else {
                                       if (searchCriteria) {
-                                        patientListFiltered =
-                                            patientList.where((element) =>
-                                                element.name!.toLowerCase().contains(
-                                                    query.toLowerCase()))
-                                                .toList();
+                                        patientListFiltered = patientList
+                                            .where((element) => element.name!
+                                                .toLowerCase()
+                                                .contains(query.toLowerCase()))
+                                            .toList();
                                       } else {
-                                        patientListFiltered =
-                                            patientList.where((element) =>
-                                                element.hCode!.contains(
-                                                    query.toLowerCase()))
-                                                .toList();
+                                        patientListFiltered = patientList
+                                            .where((element) => element.hCode!
+                                                .contains(query.toLowerCase()))
+                                            .toList();
                                       }
                                     }
                                   });
@@ -159,7 +159,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                     hintStyle: TextStyle(color: Colors.grey),
                                     prefixIcon: Icon(
                                       Icons.search,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                     ),
                                     fillColor: Colors.white,
                                     contentPadding: const EdgeInsets.symmetric(
@@ -174,12 +174,12 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       ),
                     )
                   : Center(
-                    child: Text(
+                      child: Text(
                         'Patient Profiles',
-                        style: TextStyle(color: Colors.blue.shade900),
+                        style: TextStyle(color: Colors.indigo.shade900),
                         textAlign: TextAlign.left,
                       ),
-                  ),
+                    ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(30),
@@ -190,31 +190,33 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   child: Container(
                       margin: EdgeInsets.only(right: 16),
                       child: Icon(
-                        search?Icons.search_off:Icons.search,
-                        color: Colors.blue.shade900,
+                        search ? Icons.search_off : Icons.search,
+                        color: Colors.indigo.shade900,
                       )),
                   onTap: () {
                     setState(() {
-                      search=!search;
+                      search = !search;
                     });
                   },
                 ),
-
                 InkWell(
                   child: Container(
                       margin: EdgeInsets.only(right: 16),
                       child: Icon(
                         Icons.output_sharp,
-                        color: Colors.blue.shade900,
+                        color: Colors.indigo.shade900,
                       )),
-                  onTap: () async{
+                  onTap: () async {
                     final auth = FirebaseAuth.instance;
 
-                    auth.signOut();
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, LoginScreen.id, (route) => false);
+                    final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+                    if(action==ConfirmAction.Accept){
+                      auth.signOut();
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      await preferences.clear();
+                      Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);}
+
                   },
                 ),
               ],
@@ -229,7 +231,7 @@ await preferences.clear();
                 onPressed: () {
                   Navigator.pushNamed(context, NewProfileScreen.id);
                 },
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
@@ -265,9 +267,13 @@ await preferences.clear();
                       children: [
                         SlidableAction(
                           flex: 1,
-                          onPressed: (context) {
-                            deletePatient(snapshot, patientListFiltered[index].hCode!);
-                            showToast("Patient successfully deleted");
+                          onPressed: (context) async{
+                            final ConfirmAction action = (await _asyncDeleteDialog(context))!;
+                            if(action==ConfirmAction.Accept) {
+                              deletePatient(
+                                  snapshot, patientListFiltered[index].hCode!);
+                              showToast("Patient successfully deleted");
+                            }
                           },
                           backgroundColor: Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
@@ -293,7 +299,7 @@ await preferences.clear();
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                               side: BorderSide(
-                                color: Colors.blue.shade900,
+                                color: Colors.indigo.shade900,
                               ),
                             ),
                             child: ListTile(
@@ -307,7 +313,8 @@ await preferences.clear();
                                   'Patient Name : ${patientListFiltered[index].name}'),
                               subtitle: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text('# ${patientListFiltered[index].hCode}'),
+                                child: Text(
+                                    '# ${patientListFiltered[index].hCode}'),
                               ),
                             )),
                       ),
@@ -346,3 +353,64 @@ void doNothing(BuildContext context, var snapshot) {}
 void navigate(BuildContext context) {
   Navigator.pushNamed(context, ShareScreen.id);
 }
+
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Sign out'),
+        content: const Text(
+            'Are you sure you want to sign out?'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+Future<ConfirmAction?> _asyncDeleteDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Delete patient'),
+        content: const Text(
+            'Are you sure you want to delete this patient?'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+
+

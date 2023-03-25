@@ -264,7 +264,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
                               ElevatedButton(
                                 style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade900),
+                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.indigo.shade900),
                                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(8.0),

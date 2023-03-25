@@ -2,12 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:editable/editable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/Model/Endocrinology.dart';
+import 'package:gppsupporters/Model/Rheumatology.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
 import 'package:gppsupporters/Utils/LabsTable.dart';
+import 'package:gppsupporters/View/CNSScreen.dart';
+import 'package:gppsupporters/View/CardiologyScreen.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
+import 'package:gppsupporters/View/DermatologyScreen.dart';
+import 'package:gppsupporters/View/GastroenologyScreen.dart';
+import 'package:gppsupporters/View/GeriatricsScreen.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
-import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/GuildelinesOptionsScreen.dart';
+import 'package:gppsupporters/View/HepatologyScreen.dart';
+import 'package:gppsupporters/View/ImmunologyScreen.dart';
+import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
+import 'package:gppsupporters/View/NerphologyScreen.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/OncoScreen.dart';
 import 'package:gppsupporters/View/PatientsScreen.dart';
@@ -20,7 +31,10 @@ import 'DatabaseUtils/keys.dart';
 import 'Model/Client.dart';
 import 'SplashScreen.dart';
 import 'View/CelebrateScreen.dart';
+import 'View/EndocrinologyScreen.dart';
 import 'View/LoginScreen.dart';
+import 'View/OncologyScreen.dart';
+import 'View/RheumatologyScreen.dart';
 import 'View/SignupScreen.dart';
 
 void main() async{
@@ -76,7 +90,7 @@ class MyApp extends StatelessWidget {
         routes: {
 
           DashboardView.id:(context)=>DashboardView(),
-          MedicalCalculatorView.id:(context)=>MedicalCalculatorView(),
+          MedicalCalculatorScreen.id:(context)=>MedicalCalculatorScreen(),
           GuidelineView.id:(context)=>GuidelineView(),
           ProfileScreen.id:(context)=>ProfileScreen(),
           PatientsScreen.id:(context)=>PatientsScreen(),
@@ -87,6 +101,19 @@ class MyApp extends StatelessWidget {
           SignupScreen.id:(context)=> SignupScreen(),
           ShareScreen.id:(context)=>ShareScreen(),
           DDIScreen.id:(context)=>DDIScreen(),
+          GuidelinesOptionsScreen.id:(context)=>GuidelinesOptionsScreen(),
+          CardiologyScreen.id:(context)=>CardiologyScreen(),
+          HepatologyScreen.id:(context)=>HepatologyScreen(),
+          ImmunologyScreen.id:(context)=>ImmunologyScreen(),
+          CNSScreen.id:(context)=>CNSScreen(),
+          EndocrinologyScreen.id:(context)=>EndocrinologyScreen(),
+          OncologyScreen.id:(context)=>OncologyScreen(),
+          DermatologyScreen.id:(context)=>DermatologyScreen(),
+          RheumatologyScreen.id:(context)=>RheumatologyScreen(),
+          GeriatricsScreen.id:(context)=>GeriatricsScreen(),
+          GastroenterologyScreen.id:(context)=>GastroenterologyScreen(),
+          NephrologyScreen.id:(context)=>NephrologyScreen(),
+
           CelebrateScreen.id:(context)=>CelebrateScreen(),
           //   CheckPatientScreen.id:(context)=>CheckPatientScreen(),
         }

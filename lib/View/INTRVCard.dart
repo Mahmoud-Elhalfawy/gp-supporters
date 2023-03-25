@@ -120,7 +120,7 @@ class _INTRVCardState extends State<INTRVCard> {
                             "Date: ",
                             style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.blue.shade900,
+                                color: Colors.indigo.shade900,
                                 fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
@@ -130,7 +130,7 @@ class _INTRVCardState extends State<INTRVCard> {
                             text: dataBackEnd['date'],
                             animationDuration:
                             Duration(milliseconds: 200),
-                            backgroundColor: Colors.blue.shade900,
+                            backgroundColor: Colors.indigo.shade900,
                             type: AdvanceTextFieldType.EDIT,
                             keyboardType: TextInputType.number,
                             editLabel: Icon(
@@ -160,7 +160,7 @@ class _INTRVCardState extends State<INTRVCard> {
                             "INTRV: ",
                             style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.blue.shade900,
+                                color: Colors.indigo.shade900,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -199,14 +199,14 @@ class _INTRVCardState extends State<INTRVCard> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                   borderSide: BorderSide(
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       width: 2),
                                 ),
 
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                   borderSide: BorderSide(
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       width: 2),
                                 )),
                           ),

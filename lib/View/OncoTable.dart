@@ -202,7 +202,7 @@ class _OncoTableState extends State<OncoTable> {
 
                           hintText: "BSA",
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
+                            borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
                           ),
 
                         ),
@@ -218,7 +218,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "Weight",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
                            ),
 
                          ),
@@ -236,7 +236,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "Height",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
                            ),
 
                          ),
@@ -253,7 +253,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "St Date",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
                            ),
 
                          ),
@@ -268,7 +268,7 @@ class _OncoTableState extends State<OncoTable> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(color: Colors.blue.shade900, width: 1.2)
+                      border: Border.all(color: Colors.indigo.shade900, width: 1.2)
                   ),
                   // margin: EdgeInsets.only(bottom: 16),
                   height: MediaQuery.of(context).size.height*0.6,

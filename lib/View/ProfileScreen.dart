@@ -58,20 +58,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
+                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
 
                 onTap: ()async{
-                  auth.signOut();
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
-                  Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
+                  final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+                  if(action==ConfirmAction.Accept){
+                    auth.signOut();
+                    SharedPreferences preferences = await SharedPreferences.getInstance();
+                    await preferences.clear();
+                    Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);}
+
                 },
               ),
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.blue.shade900,
-              indicatorColor: Colors.blue.shade900,
+              dividerColor: Colors.indigo.shade900,
+              indicatorColor: Colors.indigo.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs: const [
@@ -104,7 +108,7 @@ await preferences.clear();
                   SizedBox(height: 10,),
                   Row(
                     children: [
-                      Icon(Icons.numbers_rounded,color: Colors.blue.shade900,),
+                      Icon(Icons.numbers_rounded,color: Colors.indigo.shade900,),
                       SizedBox(width: 10,),
 
                       Text(args.code, style: TextStyle(color: Colors.black),),
@@ -138,3 +142,35 @@ await preferences.clear();
 
   }
 }
+
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Sign out'),
+        content: const Text(
+            'Are you sure you want to sign out?'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+

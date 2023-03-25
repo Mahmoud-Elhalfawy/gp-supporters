@@ -13,6 +13,7 @@ class ADMSheetKeys{
   static String workingUpDiagnosis="workingUpDiagnosis";
   static String allergy="allergy";
   static String physicalAssessment="physicalAssessment";
+  static String gender="gender";
 
 
 }

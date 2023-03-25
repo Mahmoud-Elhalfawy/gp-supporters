@@ -74,7 +74,7 @@ class _DDIScreenState extends State<DDIScreen> {
                         hintStyle: TextStyle(color: Colors.grey),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Colors.blue.shade900,
+                          color: Colors.indigo.shade900,
                         ),
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
@@ -91,7 +91,7 @@ class _DDIScreenState extends State<DDIScreen> {
             : Center(
           child: Text(
             'DDI',
-            style: TextStyle(color: Colors.blue.shade900),
+            style: TextStyle(color: Colors.indigo.shade900),
             textAlign: TextAlign.left,
           ),
         ),
@@ -106,7 +106,7 @@ class _DDIScreenState extends State<DDIScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   search?Icons.search_off:Icons.search,
-                  color: Colors.blue.shade900,
+                  color: Colors.indigo.shade900,
                 )),
             onTap: () {
               setState(() {
@@ -120,16 +120,19 @@ class _DDIScreenState extends State<DDIScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   Icons.output_sharp,
-                  color: Colors.blue.shade900,
+                  color: Colors.indigo.shade900,
                 )),
             onTap: ()async {
               final auth = FirebaseAuth.instance;
 
-              auth.signOut();
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, LoginScreen.id, (route) => false);
+              final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+              if(action==ConfirmAction.Accept){
+                auth.signOut();
+                SharedPreferences preferences = await SharedPreferences.getInstance();
+                await preferences.clear();
+                Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);}
+
             },
           ),
         ],
@@ -142,7 +145,7 @@ await preferences.clear();
           slivers: [
             SliverToBoxAdapter(
               child: Container(
-                margin: const EdgeInsets.only(top: 8),
+                margin: const EdgeInsets.all(8),
                 color: Colors.grey.shade200,
                 // padding: EdgeInsets.all(16),
                 height: MediaQuery.of(context).size.height*0.9,
@@ -223,3 +226,36 @@ await preferences.clear();
 
   }
 }
+
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Sign out'),
+        content: const Text(
+            'Are you sure you want to sign out?'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+
+

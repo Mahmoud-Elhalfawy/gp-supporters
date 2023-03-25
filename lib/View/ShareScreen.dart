@@ -88,7 +88,7 @@ class _ShareScreenState extends State<ShareScreen> {
             appBar: AppBar(
 
               leading: Icon(Icons.menu, color: Colors.transparent,),
-              title: Text('Patient Profiles', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
+              title: Text('Patient Profiles', style: TextStyle(color: Colors.indigo.shade900),textAlign: TextAlign.left,),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(30),
@@ -100,15 +100,19 @@ class _ShareScreenState extends State<ShareScreen> {
                 InkWell(
                   child: Container(
                       margin: EdgeInsets.only(right: 16),
-                      child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
+                      child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
 
                   onTap: ()async{
                     final auth = FirebaseAuth.instance;
 
-                    auth.signOut();
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
-                    Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
+                    final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+                    if(action==ConfirmAction.Accept){
+                      auth.signOut();
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      await preferences.clear();
+                      Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);}
+
                   },
                 ),
               ],
@@ -122,7 +126,7 @@ await preferences.clear();
                 onPressed: () {
                   Navigator.pushNamed(context, NewProfileScreen.id);
                 },
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 child: const Icon(Icons.add,color: Colors.white,),
               ),
             ),
@@ -153,7 +157,7 @@ await preferences.clear();
 
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                               side: BorderSide(
-                                color: Colors.blue.shade900,
+                                color: Colors.indigo.shade900,
                               ),
                             ),
                             child: ListTile(
@@ -184,7 +188,7 @@ await preferences.clear();
 
 // void doNothing(BuildContext context) {}
 enum ConfirmAction { Cancel, Accept}
-Future<Future<ConfirmAction?>> _asyncConfirmDialog(BuildContext context) async {
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
   return showDialog<ConfirmAction>(
     context: context,
     barrierDismissible: false, // user must tap button for close dialog!

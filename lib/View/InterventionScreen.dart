@@ -41,7 +41,7 @@ class _InterventionScreenState extends State<InterventionScreen> {
                   'Add INTRV',
                   style: TextStyle(color: Colors.white),
                 ), // <-- Text
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 icon: const Icon(
                   // <-- Icon
                   Icons.add,

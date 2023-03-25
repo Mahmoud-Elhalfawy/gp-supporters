@@ -1,10 +1,17 @@
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:editable/editable.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gppsupporters/DatabaseUtils/LabSheetKeys.dart';
 import 'package:gppsupporters/Model/Client.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
 
 
 class LabsScreen extends StatefulWidget {
@@ -50,6 +57,79 @@ class _LabsScreenState extends State<LabsScreen> {
 
   ];
 
+
+  Future<void> generateExcel(AsyncSnapshot<QuerySnapshot> snapshot) async
+  {
+    // Map<String,dynamic> data=patient.originateData();
+    int row=1;
+    int col=1;
+    //Create a Excel document.
+    //Creating a workbook.
+    final Excel.Workbook workbook = Excel.Workbook();
+    //Accessing via index.
+    final Excel.Worksheet sheet = workbook.worksheets[0];
+
+    // Set the text value.
+    for(var column in cols) {
+      sheet.getRangeByIndex(row, col).setText(column['title']);
+      col++;
+    }
+
+    row=row+1;
+    for(var rowV in returnedRows){
+      col=1;
+      for(var column in cols) {
+        sheet.getRangeByIndex(row, col).setText(rowV[column['key'].toString()]??"-");
+        col++;
+      }
+      row++;
+    }
+
+
+    if (!kIsWeb) {
+      if (Platform.isIOS ||
+          Platform.isAndroid ||
+          Platform.isMacOS) {
+        bool status = await Permission.storage.isGranted;
+
+        if (!status) await Permission.storage.request();
+      }
+    }
+
+
+
+    showToast("Labs sheet saved succesfully");
+
+
+
+    List<int> sheets = workbook.saveAsStream();
+
+    workbook.dispose();
+    Uint8List dataList = Uint8List.fromList(sheets);
+    MimeType type = MimeType.MICROSOFTEXCEL;
+    String path = await FileSaver.instance.saveAs(
+        "MedScreen - ${widget.code}",
+        dataList,
+        "xlsx",
+        type);
+    print(path);
+
+
+
+
+  }
+
+
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
   /// Function to add a new row
   /// Using the global key assigined to Editable widget
   /// Access the current state of Editable
@@ -178,7 +258,7 @@ class _LabsScreenState extends State<LabsScreen> {
 
                     FloatingActionButton.extended(
                       label: const Text('Add row', style: TextStyle(color: Colors.white),), // <-- Text
-                      backgroundColor: Colors.blue.shade900,
+                      backgroundColor: Colors.indigo.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add,
                         color: Colors.white,
@@ -189,10 +269,29 @@ class _LabsScreenState extends State<LabsScreen> {
                         _addNewRow();
                       },
                     ),
+                    FloatingActionButton(
+                      // label: const Text(
+                      //   'Save',
+                      //   style: TextStyle(color: Colors.white),
+                      // ), // <-- Text
+                      backgroundColor: Colors.grey.shade600,
+                      child: const Icon(
+                        // <-- Icon
+                        Icons.print,
+                        color: Colors.white,
+                      ),
+                      onPressed: ()async {
+                        final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+                        if(action==ConfirmAction.Accept){
+                          await generateExcel(snapshot);
+                        }
+                      },
+                    ),
 
                     FloatingActionButton.extended(
                       label: const Text('Add column', style: TextStyle(color: Colors.white)), // <-- Text
-                      backgroundColor: Colors.blue.shade900,
+                      backgroundColor: Colors.indigo.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add_box_outlined,
                         color: Colors.white,
@@ -209,7 +308,7 @@ class _LabsScreenState extends State<LabsScreen> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(color: Colors.blue.shade900, width: 1.2)
+                      border: Border.all(color: Colors.indigo.shade900, width: 1.2)
                   ),
                   // margin: EdgeInsets.only(bottom: 16),
                   height: MediaQuery.of(context).size.height*0.6,
@@ -262,4 +361,34 @@ class _LabsScreenState extends State<LabsScreen> {
 
 
   }
+}
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Generating excel sheet'),
+        content: const Text(
+            'This will generate excel sheet for labs sheet of patient'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
 }

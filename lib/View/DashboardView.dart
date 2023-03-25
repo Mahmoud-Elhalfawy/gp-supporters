@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
 import 'package:gppsupporters/View/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
-import 'package:gppsupporters/View/MedicalCalculatorView.dart';
+import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/PatientsScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'GuildelinesOptionsScreen.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
 
         leading: Icon(Icons.menu, color: Colors.transparent,),
-        title: Text('Dashboard', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
+        title: Text('Dashboard', style: TextStyle(color: Colors.indigo.shade900),textAlign: TextAlign.left,),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -34,17 +36,30 @@ class _DashboardViewState extends State<DashboardView> {
         ),
 
         actions:  [
+          InkWell(
+            child: Container(
+                margin: EdgeInsets.only(right: 16),
+                child: Image.asset("assets/img/working.png", fit: BoxFit.contain,height: 35,width: 35,)),
+
+            onTap: ()async{
+
+            },
+          ),
 
           InkWell(
             child: Container(
                 margin: EdgeInsets.only(right: 16),
-                child: Icon(Icons.output_sharp, color: Colors.blue.shade900,)),
+                child: Icon(Icons.output_sharp, color: Colors.indigo.shade900,size: 35,)),
 
             onTap: ()async{
-              auth.signOut();
-SharedPreferences preferences = await SharedPreferences.getInstance();
-await preferences.clear();
-              Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);
+              final ConfirmAction action = (await _asyncConfirmDialog(context))!;
+
+              if(action==ConfirmAction.Accept){
+                auth.signOut();
+                SharedPreferences preferences = await SharedPreferences.getInstance();
+                await preferences.clear();
+                Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id, (route) => false);}
+
             },
           ),
         ],
@@ -74,7 +89,7 @@ await preferences.clear();
                       borderRadius: BorderRadius.all(Radius.circular(20)),
 
                        child: Container(
-                         width: 160,
+                         width: 170,
                         height: 210,
                         decoration: BoxDecoration(
 
@@ -82,7 +97,7 @@ await preferences.clear();
                         ),
 
                          child: InkWell(
-                           onTap: ()=> Navigator.pushNamed(context, MedicalCalculatorView.id),
+                           onTap: ()=> Navigator.pushNamed(context, MedicalCalculatorScreen.id),
                            child: Center(child: Column(
                              mainAxisAlignment: MainAxisAlignment.center,
                              children: [
@@ -100,7 +115,7 @@ await preferences.clear();
                       borderRadius: BorderRadius.all(Radius.circular(20)),
 
                       child: Container(
-                        width: 160,
+                        width: 170,
                         height: 210,
                         padding: EdgeInsets.only(left: 10),
                         decoration: BoxDecoration(
@@ -148,29 +163,29 @@ await preferences.clear();
                         shape: CircleBorder(),
                         padding: EdgeInsets.all(20),
                         backgroundColor: Colors.white, // <-- Button color
-                        foregroundColor: Colors.blue.shade900, // <-- Splash color
+                        foregroundColor: Colors.indigo.shade900, // <-- Splash color
                       ),
                     ),
 
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Column(
-                        children: [
-                          Text("About us", style: TextStyle(color: Colors.black, fontSize: 20),),
-                          Image.asset('assets/img/working.png',width: 45,height: 45,)
-                          ,
-                        ],
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(130,110),
-                        maximumSize: Size(130,110),
-
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(20),
-                        backgroundColor: Colors.white, // <-- Button color
-                        foregroundColor: Colors.blue.shade900, // <-- Splash color
-                      ),
-                    ),
+                    // ElevatedButton(
+                    //   onPressed: () {},
+                    //   child: Column(
+                    //     children: [
+                    //       Text("About us", style: TextStyle(color: Colors.black, fontSize: 20),),
+                    //       Image.asset('assets/img/working.png',width: 45,height: 45,)
+                    //       ,
+                    //     ],
+                    //   ),
+                    //   style: ElevatedButton.styleFrom(
+                    //     minimumSize: Size(130,110),
+                    //     maximumSize: Size(130,110),
+                    //
+                    //     shape: CircleBorder(),
+                    //     padding: EdgeInsets.all(20),
+                    //     backgroundColor: Colors.white, // <-- Button color
+                    //     foregroundColor: Colors.indigo.shade900, // <-- Splash color
+                    //   ),
+                    // ),
 
 
                   ],
@@ -185,7 +200,7 @@ await preferences.clear();
                       borderRadius: BorderRadius.all(Radius.circular(20)),
 
                       child: Container(
-                        width: 160,
+                        width: 170,
                         height: 210,
                         decoration: BoxDecoration(
 
@@ -193,7 +208,7 @@ await preferences.clear();
                         ),
 
                         child: InkWell(
-                          onTap: ()=> Navigator.pushNamed(context, GuidelineView.id),
+                          onTap: ()=> Navigator.pushNamed(context, GuidelinesOptionsScreen.id),
                           child: Center(child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -215,7 +230,7 @@ await preferences.clear();
                         borderRadius: BorderRadius.all(Radius.circular(20)),
 
                         child: Container(
-                          width: 160,
+                          width: 170,
                           height: 210,
                           decoration: BoxDecoration(
 
@@ -245,3 +260,35 @@ await preferences.clear();
     );
   }
 }
+
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Sign out'),
+        content: const Text(
+            'Are you sure you want to sign out?'),
+        actions: <Widget>[
+          ElevatedButton(
+
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
+}
+

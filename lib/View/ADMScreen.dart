@@ -150,6 +150,7 @@ class _ADMScreenState extends State<ADMScreen> {
         ADMSheetKeys.workingUpDiagnosis: patient.workingUpDiagnosis,
       if (patient.physicalAssesment != null)
         ADMSheetKeys.physicalAssessment: patient.physicalAssesment,
+      ADMSheetKeys.gender:patient.gender ?? "male",
     };
 
     save(dataToBackend, snapshot);
@@ -194,7 +195,7 @@ class _ADMScreenState extends State<ADMScreen> {
                         //   'Save',
                         //   style: TextStyle(color: Colors.white),
                         // ), // <-- Text
-                        backgroundColor: Colors.blue.shade900,
+                        backgroundColor: Colors.indigo.shade900,
                         child: const Icon(
                           // <-- Icon
                           Icons.save,
@@ -210,7 +211,7 @@ class _ADMScreenState extends State<ADMScreen> {
                         //   'Save',
                         //   style: TextStyle(color: Colors.white),
                         // ), // <-- Text
-                        backgroundColor: Colors.green.shade900,
+                        backgroundColor: Colors.grey.shade600,
                         child: const Icon(
                           // <-- Icon
                           Icons.print,
@@ -235,7 +236,7 @@ class _ADMScreenState extends State<ADMScreen> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(5)),
                         border: Border.all(
-                            color: Colors.blue.shade900, width: 1.2)),
+                            color: Colors.indigo.shade900, width: 1.2)),
                     height: MediaQuery.of(context).size.height * 0.6,
                     child: SingleChildScrollView(
                       child: Padding(
@@ -251,7 +252,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Patient Name: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(
@@ -261,7 +262,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['name'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   editLabel: const Icon(
                                     Icons.edit,
@@ -289,7 +290,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Hospital Code: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -299,7 +300,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['hCode'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   editLabel: Icon(
                                     Icons.edit,
@@ -327,7 +328,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Gender: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -368,7 +369,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Age: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -378,7 +379,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['age'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   keyboardType: TextInputType.number,
                                   editLabel: Icon(
@@ -406,7 +407,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Height: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -416,7 +417,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['height'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   keyboardType: TextInputType.number,
                                   editLabel: const Icon(
@@ -446,7 +447,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Weight: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -456,7 +457,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['weight'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   keyboardType: TextInputType.number,
                                   editLabel: Icon(
@@ -485,7 +486,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "COA: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -495,7 +496,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['coa'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   editLabel: Icon(
                                     Icons.edit,
@@ -523,7 +524,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Surgical Hx: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -533,7 +534,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['surgicalHx'],
                                   animationDuration:
                                   Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   editLabel: Icon(
                                     Icons.edit,
@@ -563,7 +564,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Med Hx: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -596,12 +597,12 @@ class _ADMScreenState extends State<ADMScreen> {
                                           vertical: 50.0, horizontal: 5),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       ),
 
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       )),
                                 ),
                               ],
@@ -615,7 +616,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Drug Hx: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -649,12 +650,12 @@ class _ADMScreenState extends State<ADMScreen> {
                                           vertical: 50.0, horizontal: 5),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       ),
 
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       )),
                                 ),
 
@@ -670,7 +671,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Allergy: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -680,7 +681,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['allergy'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   keyboardType: TextInputType.multiline,
                                   editLabel: Icon(
@@ -709,7 +710,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Working up Diagnosis: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -719,7 +720,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   text: dataBackEnd['workingUpDiagnosis'],
                                   animationDuration:
                                       Duration(milliseconds: 200),
-                                  backgroundColor: Colors.blue.shade900,
+                                  backgroundColor: Colors.indigo.shade900,
                                   type: AdvanceTextFieldType.EDIT,
                                   keyboardType: TextInputType.multiline,
                                   editLabel: const Icon(
@@ -748,7 +749,7 @@ class _ADMScreenState extends State<ADMScreen> {
                                   "Physical Assesment: ",
                                   style: TextStyle(
                                       fontSize: 18,
-                                      color: Colors.blue.shade900,
+                                      color: Colors.indigo.shade900,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -782,12 +783,12 @@ class _ADMScreenState extends State<ADMScreen> {
                                           vertical: 50.0, horizontal: 5),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       ),
 
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(10),
-                                        borderSide: BorderSide(color: Colors.blue.shade900, width: 2),
+                                        borderSide: BorderSide(color: Colors.indigo.shade900, width: 2),
                                       )),
                                 ),
 

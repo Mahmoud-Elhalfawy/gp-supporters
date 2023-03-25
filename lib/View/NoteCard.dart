@@ -121,7 +121,7 @@ class _NoteCardState extends State<NoteCard> {
                                 "Date: ",
                                 style: TextStyle(
                                     fontSize: 18,
-                                    color: Colors.blue.shade900,
+                                    color: Colors.indigo.shade900,
                                     fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(
@@ -131,7 +131,7 @@ class _NoteCardState extends State<NoteCard> {
                                 text: dataBackEnd['date'],
                                 animationDuration:
                                 Duration(milliseconds: 200),
-                                backgroundColor: Colors.blue.shade900,
+                                backgroundColor: Colors.indigo.shade900,
                                 type: AdvanceTextFieldType.EDIT,
                                 keyboardType: TextInputType.number,
                                 editLabel: Icon(
@@ -161,7 +161,7 @@ class _NoteCardState extends State<NoteCard> {
                                 "Note: ",
                                 style: TextStyle(
                                     fontSize: 18,
-                                    color: Colors.blue.shade900,
+                                    color: Colors.indigo.shade900,
                                     fontWeight: FontWeight.bold),
                               ),
                               SizedBox(
@@ -200,14 +200,14 @@ class _NoteCardState extends State<NoteCard> {
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(
-                                          color: Colors.blue.shade900,
+                                          color: Colors.indigo.shade900,
                                           width: 2),
                                     ),
 
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(6),
                                       borderSide: BorderSide(
-                                          color: Colors.blue.shade900,
+                                          color: Colors.indigo.shade900,
                                           width: 2),
                                     )),
                               ),

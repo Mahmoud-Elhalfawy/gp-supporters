@@ -54,7 +54,7 @@ class _NotesScreenState extends State<NotesScreen> {
                   'Add Note',
                   style: TextStyle(color: Colors.white),
                 ), // <-- Text
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 icon: const Icon(
                   // <-- Icon
                   Icons.add,

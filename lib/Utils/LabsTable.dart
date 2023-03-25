@@ -111,7 +111,7 @@ class _LabsTableViewState extends State<LabsTableView> {
 
               FloatingActionButton.extended(
                 label: const Text('Add row', style: TextStyle(color: Colors.white),), // <-- Text
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 icon: const Icon( // <-- Icon
                   Icons.add,
                   color: Colors.white,
@@ -125,7 +125,7 @@ class _LabsTableViewState extends State<LabsTableView> {
 
               FloatingActionButton.extended(
                 label: const Text('Add column', style: TextStyle(color: Colors.white)), // <-- Text
-                backgroundColor: Colors.blue.shade900,
+                backgroundColor: Colors.indigo.shade900,
                 icon: const Icon( // <-- Icon
                   Icons.add_box_outlined,
                   color: Colors.white,
@@ -142,7 +142,7 @@ class _LabsTableViewState extends State<LabsTableView> {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(5)),
-              border: Border.all(color: Colors.blue.shade900, width: 1)
+              border: Border.all(color: Colors.indigo.shade900, width: 1)
             ),
             // margin: EdgeInsets.only(bottom: 16),
             height: MediaQuery.of(context).size.height*0.6,
