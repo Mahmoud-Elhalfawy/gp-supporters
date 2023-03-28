@@ -10,12 +10,12 @@ import 'package:gppsupporters/Model/Oncology.dart';
 import 'package:gppsupporters/Model/Rheumatology.dart';
 import 'package:gppsupporters/View/CardView.dart';
 
-import '../Model/CNS.dart';
-import '../Model/Gastroenology.dart';
-import '../Model/Geriatrics.dart';
-import '../Model/GuidelineCard.dart';
-import '../Model/Hepatology.dart';
-import '../Model/Nephrology.dart';
+import '../../Model/CNS.dart';
+import '../../Model/Gastroenology.dart';
+import '../../Model/Geriatrics.dart';
+import '../../Model/GuidelineCard.dart';
+import '../../Model/Hepatology.dart';
+import '../../Model/Nephrology.dart';
 
 class GuidelinesListScreen extends StatefulWidget {
   String type;
@@ -94,7 +94,7 @@ class _GuidelinesListScreenState extends State<GuidelinesListScreen> {
                               hintStyle: TextStyle(color: Colors.grey),
                               prefixIcon: Icon(
                                 Icons.search,
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                               ),
                               fillColor: Colors.white,
                               contentPadding: const EdgeInsets.symmetric(

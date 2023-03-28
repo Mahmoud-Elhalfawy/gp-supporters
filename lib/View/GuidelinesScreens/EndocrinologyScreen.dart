@@ -1,24 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/Model/Endocrinology.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/Gastroenology.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/CNS.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class GastroenterologyScreen extends StatefulWidget {
-  const GastroenterologyScreen({Key? key}) : super(key: key);
-  static String id="gastro screen";
+class EndocrinologyScreen extends StatefulWidget {
+  const EndocrinologyScreen({Key? key}) : super(key: key);
+  static String id="endocrinology screen";
   static String code='';
 
   @override
-  State<GastroenterologyScreen> createState() => _GastroenterologyScreenState();
+  State<EndocrinologyScreen> createState() => _EndocrinologyScreenState();
 }
 
-class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
+class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -27,7 +28,7 @@ class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
 
 
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -47,7 +48,7 @@ class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -63,22 +64,21 @@ class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Gastroenterology.option1),
-                Tab(text:Gastroenterology.option2),
+                Tab(text:Endocrinology.option1),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Gastroenterology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Endocrinology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -88,8 +88,8 @@ class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "Gastroenterology", subType: Gastroenterology.option1,),
-              GuidelinesListScreen(type: "Gastroenterology", subType: Gastroenterology.option2,),
+              GuidelinesListScreen(type: "endocrinology", subType: Endocrinology.option1,),
+
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

@@ -88,7 +88,7 @@ class _ShareScreenState extends State<ShareScreen> {
             appBar: AppBar(
 
               leading: Icon(Icons.menu, color: Colors.transparent,),
-              title: Text('Patient Profiles', style: TextStyle(color: Colors.indigo.shade900),textAlign: TextAlign.left,),
+              title: Text('Patient Profiles', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(30),
@@ -100,7 +100,7 @@ class _ShareScreenState extends State<ShareScreen> {
                 InkWell(
                   child: Container(
                       margin: EdgeInsets.only(right: 16),
-                      child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                      child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                   onTap: ()async{
                     final auth = FirebaseAuth.instance;
@@ -126,7 +126,7 @@ class _ShareScreenState extends State<ShareScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, NewProfileScreen.id);
                 },
-                backgroundColor: Colors.indigo.shade900,
+                backgroundColor: Colors.blue.shade900,
                 child: const Icon(Icons.add,color: Colors.white,),
               ),
             ),
@@ -157,7 +157,7 @@ class _ShareScreenState extends State<ShareScreen> {
 
                               borderRadius: BorderRadius.all(Radius.circular(10)),
                               side: BorderSide(
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                               ),
                             ),
                             child: ListTile(

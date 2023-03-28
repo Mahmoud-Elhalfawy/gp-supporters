@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/View/AboutusScreen.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
-import 'package:gppsupporters/View/GuidelineView.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
@@ -9,7 +10,7 @@ import 'package:gppsupporters/View/PatientsScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'GuildelinesOptionsScreen.dart';
+import 'GuidelinesScreens/GuildelinesOptionsScreen.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
 
         leading: Icon(Icons.menu, color: Colors.transparent,),
-        title: Text('Dashboard', style: TextStyle(color: Colors.indigo.shade900),textAlign: TextAlign.left,),
+        title: Text('Dashboard', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -42,14 +43,14 @@ class _DashboardViewState extends State<DashboardView> {
                 child: Image.asset("assets/img/working.png", fit: BoxFit.contain,height: 35,width: 35,)),
 
             onTap: ()async{
-
+                    Navigator.pushNamed(context, AboutusScreen.id);
             },
           ),
 
           InkWell(
             child: Container(
                 margin: EdgeInsets.only(right: 16),
-                child: Icon(Icons.output_sharp, color: Colors.indigo.shade900,size: 35,)),
+                child: Icon(Icons.output_sharp, color: Colors.blue.shade900,size: 35,)),
 
             onTap: ()async{
               final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -163,7 +164,7 @@ class _DashboardViewState extends State<DashboardView> {
                         shape: CircleBorder(),
                         padding: EdgeInsets.all(20),
                         backgroundColor: Colors.white, // <-- Button color
-                        foregroundColor: Colors.indigo.shade900, // <-- Splash color
+                        foregroundColor: Colors.blue.shade900, // <-- Splash color
                       ),
                     ),
 
@@ -183,7 +184,7 @@ class _DashboardViewState extends State<DashboardView> {
                     //     shape: CircleBorder(),
                     //     padding: EdgeInsets.all(20),
                     //     backgroundColor: Colors.white, // <-- Button color
-                    //     foregroundColor: Colors.indigo.shade900, // <-- Splash color
+                    //     foregroundColor: Colors.blue.shade900, // <-- Splash color
                     //   ),
                     // ),
 

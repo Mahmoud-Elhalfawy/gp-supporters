@@ -1,25 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/Model/Endocrinology.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
-import 'package:gppsupporters/View/ProfileScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/CNS.dart';
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../LoginScreen.dart';
 
-class EndocrinologyScreen extends StatefulWidget {
-  const EndocrinologyScreen({Key? key}) : super(key: key);
-  static String id="endocrinology screen";
+class HepatologyScreen extends StatefulWidget {
+  const HepatologyScreen({Key? key}) : super(key: key);
+  static String id="hepatology screen";
   static String code='';
 
   @override
-  State<EndocrinologyScreen> createState() => _EndocrinologyScreenState();
+  State<HepatologyScreen> createState() => _HepatologyScreenState();
 }
 
-class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
+class _HepatologyScreenState extends State<HepatologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -28,7 +24,7 @@ class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
 
 
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -47,8 +43,8 @@ class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
 
               InkWell(
                 child: Container(
-                    margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    margin: const EdgeInsets.only(right: 16),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -64,21 +60,22 @@ class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
-              tabs:  [
+              tabs: const [
 
-                Tab(text:Endocrinology.option1),
+                Tab(text:"AASLD"),
+                Tab(text:"EASL"),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Endocrinology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Hepatology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -88,19 +85,10 @@ class _EndocrinologyScreenState extends State<EndocrinologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "endocrinology", subType: Endocrinology.option1,),
+              GuidelinesListScreen(type: "hepatology", subType: "aasld",),
+              GuidelinesListScreen(type: "hepatology", subType: "easl",),
 
 
-              // ADMScreen(code: ProfileScreen.code),
-              // LabsScreen(code: ProfileScreen.code),
-              // MedScreen(code: ProfileScreen.code,),
-              // VitalsScreen(code: ProfileScreen.code),
-              // OncoScreen(code: ProfileScreen.code),
-              //
-              // Icon(Icons.downloading),
-              // NotesScreen(code: ProfileScreen.code,),
-              // InterventionScreen(code: ProfileScreen.code,),
-              //
 
             ],
           ),

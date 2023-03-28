@@ -33,7 +33,7 @@ class _GuidelineOptionCardState extends State<GuidelineOptionCard> {
                 shape: RoundedRectangleBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   side: BorderSide(
-                    color: Colors.indigo.shade900,
+                    color: Colors.blue.shade900,
                   ),
                 ),
                 child: Column(
@@ -53,7 +53,7 @@ class _GuidelineOptionCardState extends State<GuidelineOptionCard> {
                         flex: 2,
                         child: Container(
 
-                            color: Colors.indigo.shade900,
+                            color: Colors.blue.shade900,
 
                             child: Center(
                                 child: Text(

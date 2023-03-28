@@ -77,7 +77,7 @@ class _MedicalCalculatorScreenState extends State<MedicalCalculatorScreen> {
                         hintStyle: TextStyle(color: Colors.grey),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Colors.indigo.shade900,
+                          color: Colors.blue.shade900,
                         ),
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
@@ -94,7 +94,7 @@ class _MedicalCalculatorScreenState extends State<MedicalCalculatorScreen> {
             : Center(
           child: Text(
             'Medical Calculators',
-            style: TextStyle(color: Colors.indigo.shade900),
+            style: TextStyle(color: Colors.blue.shade900),
             textAlign: TextAlign.left,
           ),
         ),
@@ -109,7 +109,7 @@ class _MedicalCalculatorScreenState extends State<MedicalCalculatorScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   search?Icons.search_off:Icons.search,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: () {
               setState(() {
@@ -123,7 +123,7 @@ class _MedicalCalculatorScreenState extends State<MedicalCalculatorScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   Icons.output_sharp,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: () async{
               final auth = FirebaseAuth.instance;

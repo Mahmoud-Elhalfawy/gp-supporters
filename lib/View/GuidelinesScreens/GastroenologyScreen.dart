@@ -1,24 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/Model/Geriatrics.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/Gastroenology.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class GeriatricsScreen extends StatefulWidget {
-  const GeriatricsScreen({Key? key}) : super(key: key);
-  static String id="geriatrics screen";
+class GastroenterologyScreen extends StatefulWidget {
+  const GastroenterologyScreen({Key? key}) : super(key: key);
+  static String id="gastro screen";
   static String code='';
 
   @override
-  State<GeriatricsScreen> createState() => _GeriatricsScreenState();
+  State<GastroenterologyScreen> createState() => _GastroenterologyScreenState();
 }
 
-class _GeriatricsScreenState extends State<GeriatricsScreen> {
+class _GastroenterologyScreenState extends State<GastroenterologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -47,7 +47,7 @@ class _GeriatricsScreenState extends State<GeriatricsScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -63,22 +63,22 @@ class _GeriatricsScreenState extends State<GeriatricsScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Geriatrics.option1),
-                Tab(text:Geriatrics.option2),
+                Tab(text:Gastroenterology.option1),
+                Tab(text:Gastroenterology.option2),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Geriatrics',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Gastroenterology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -88,8 +88,8 @@ class _GeriatricsScreenState extends State<GeriatricsScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "geriatrics", subType: Geriatrics.option1,),
-              GuidelinesListScreen(type: "geriatrics", subType: Geriatrics.option2,),
+              GuidelinesListScreen(type: "Gastroenterology", subType: Gastroenterology.option1,),
+              GuidelinesListScreen(type: "Gastroenterology", subType: Gastroenterology.option2,),
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

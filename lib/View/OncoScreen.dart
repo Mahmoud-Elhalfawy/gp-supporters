@@ -24,12 +24,10 @@ class _OncoScreenState extends State<OncoScreen> {
   int maxIndex=0;
   bool firstFetch=true;
   final _editableKey = GlobalKey<EditableState>();
-  final _editableKey2 = GlobalKey<EditableState>();
-  final _editableKey3 = GlobalKey<EditableState>();
+
   List<Widget> cycles = List.empty(growable: true);
   List returnedRows = [];
-  List returnedRowsABG = [];
-  List returnedRowsCulture = [];
+
 
   Client client = Client();
 
@@ -60,34 +58,7 @@ class _OncoScreenState extends State<OncoScreen> {
     {"title": 'Drain Output', 'widthFactor': 0.4, 'key': 'draino'},
   ];
 
-  List colsABG = [
-    {
-      "title": 'PH (7.35-7.45)',
-      'widthFactor': 0.4,
-      'key': 'ph',
-      'editable': true,
-    },
-    {"title": 'PO2 (75-100 mmHg)', 'widthFactor': 0.4, 'key': 'po2'},
-    {"title": 'PCO2 (35-45 mmHG)', 'widthFactor': 0.4, 'key': 'pco2'},
-    {"title": 'HCO3 (18-22 mmol/L)', 'widthFactor': 0.4, 'key': 'hco3'},
-    {
-      "title": 'Oxygen saturation (96%-100%)',
-      'widthFactor': 0.4,
-      'key': 'oxygenS'
-    },
-  ];
 
-  List colsCulture = [
-    {
-      "title": 'Date',
-      'widthFactor': 0.4,
-      'key': 'date',
-      'editable': true,
-    },
-    {"title": 'Culture type', 'widthFactor': 0.4, 'key': 'culturet'},
-    {"title": 'Organism', 'widthFactor': 0.4, 'key': 'organsim'},
-    {"title": 'Antibiogram', 'widthFactor': 0.4, 'key': 'antibiogram'},
-  ];
 
   ///Print only edited rows.
   void _printEditedRows() {
@@ -107,7 +78,7 @@ class _OncoScreenState extends State<OncoScreen> {
                 'Add Cycle',
                 style: TextStyle(color: Colors.white),
               ), // <-- Text
-              backgroundColor: Colors.indigo.shade900,
+              backgroundColor: Colors.blue.shade900,
               icon: const Icon(
                 // <-- Icon
                 Icons.add,

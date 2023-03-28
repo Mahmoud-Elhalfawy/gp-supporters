@@ -8,6 +8,14 @@ import '../DatabaseUtils/LabSheetKeys.dart';
 import '../Model/Client.dart';
 import '../Model/Note.dart';
 import 'ProfileScreen.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:editable/editable.dart';
+import 'package:file_saver/file_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
+
 
 class INTRVCard extends StatefulWidget {
   String code;
@@ -19,10 +27,65 @@ class INTRVCard extends StatefulWidget {
 }
 
 class _INTRVCardState extends State<INTRVCard> {
-  Map<String, dynamic> dataBackEnd={};
+  Map<String, dynamic> dataToBackend={};
   bool female = true;
   Note note = Note();
   Client client = Client();
+
+
+  Future<void> generateExcel(AsyncSnapshot<QuerySnapshot> snapshot) async {
+
+    clone(snapshot);
+    // Map<String,dynamic> data=patient.originateData();
+    int row = 1;
+    int col = 1;
+    //Create a Excel document.
+    //Creating a workbook.
+    final Excel.Workbook workbook = Excel.Workbook();
+    //Accessing via index.
+    final Excel.Worksheet sheet = workbook.worksheets[0];
+
+
+    print("datatobackend ${dataToBackend.keys}");
+    // Set the text value.
+    for (var title in dataToBackend.keys) {
+      print("title is $title");
+      sheet.getRangeByIndex(row, col).setText(title);
+      col++;
+    }
+
+    row = row + 1;
+
+
+      col = 1;
+      for (String column in dataToBackend.keys) {
+        sheet
+            .getRangeByIndex(row, col)
+            .setText(dataToBackend[column.toString()].toString() ?? "-");
+
+        col++;
+      }
+
+
+    if (!kIsWeb) {
+      if (Platform.isIOS || Platform.isAndroid || Platform.isMacOS) {
+        bool status = await Permission.storage.isGranted;
+
+        if (!status) await Permission.storage.request();
+      }
+    }
+
+    showToast("INTRV sheet saved succesfully");
+
+    List<int> sheets = workbook.saveAsStream();
+
+    workbook.dispose();
+    Uint8List dataList = Uint8List.fromList(sheets);
+    MimeType type = MimeType.MICROSOFTEXCEL;
+    String path = await FileSaver.instance
+        .saveAs("intrv ${widget.intrvIndex} - ${widget.code}", dataList, "xlsx", type);
+    print(path);
+  }
 
   void save(Map<String, dynamic> dataToBackend,
       AsyncSnapshot<QuerySnapshot> snapshot) async {
@@ -58,7 +121,6 @@ class _INTRVCardState extends State<INTRVCard> {
     if(note.date!.isEmpty || note.date==null) {
       showToast("date cannot be empty");
     } else {
-      Map<String, dynamic> dataToBackend = {};
       dataToBackend.putIfAbsent(LabSheetKeys.user, () => client.token);
       dataToBackend.putIfAbsent("hCode", () => widget.code);
       dataToBackend.putIfAbsent("intrvIndex", () => widget.intrvIndex);
@@ -88,13 +150,14 @@ class _INTRVCardState extends State<INTRVCard> {
           var checkedValue = snapshot.data?.docs.where((element) =>
           element['user'] == client.token &&
               element['hCode'] == ProfileScreen.code && element['intrvIndex']==widget.intrvIndex);
-          Map<String, dynamic> dataBackEnd = checkedValue!.isEmpty
+           dataToBackend = checkedValue!.isEmpty
               ? Map()
               : checkedValue.first.data() as Map<String, dynamic>;
-          note.cloneData(dataBackEnd);
+          note.cloneData(dataToBackend);
           return Card(
             elevation: 10,
             child: Container(
+
               decoration: BoxDecoration(
                   borderRadius:
                   const BorderRadius.all(Radius.circular(5)),
@@ -103,7 +166,7 @@ class _INTRVCardState extends State<INTRVCard> {
               height: MediaQuery
                   .of(context)
                   .size
-                  .height * 0.6,
+                  .height * 0.7,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -115,22 +178,46 @@ class _INTRVCardState extends State<INTRVCard> {
 
                       Column(
                         children: [
+
+
                           SizedBox(height: 15,),
+                          FloatingActionButton(
+                            // label: const Text(
+                            //   'Save',
+                            //   style: TextStyle(color: Colors.white),
+                            // ), // <-- Text
+                            backgroundColor: Colors.grey.shade600,
+                            child: const Icon(
+                              // <-- Icon
+                              Icons.print,
+                              color: Colors.white,
+                            ),
+                            onPressed: () async {
+                              final ConfirmAction action =
+                              (await _asyncConfirmDialog(context))!;
+
+                              if (action == ConfirmAction.Accept) {
+                                await generateExcel(snapshot);
+                              }
+                            },
+                          ),
+                          SizedBox(height: 15,),
+
                           Text(
                             "Date: ",
                             style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                                 fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
                           AdvanceTextField(
-                            text: dataBackEnd['date'],
+                            text: dataToBackend['date'],
                             animationDuration:
                             Duration(milliseconds: 200),
-                            backgroundColor: Colors.indigo.shade900,
+                            backgroundColor: Colors.blue.shade900,
                             type: AdvanceTextFieldType.EDIT,
                             keyboardType: TextInputType.number,
                             editLabel: Icon(
@@ -160,7 +247,7 @@ class _INTRVCardState extends State<INTRVCard> {
                             "INTRV: ",
                             style: TextStyle(
                                 fontSize: 18,
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -199,14 +286,14 @@ class _INTRVCardState extends State<INTRVCard> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                   borderSide: BorderSide(
-                                      color: Colors.indigo.shade900,
+                                      color: Colors.blue.shade900,
                                       width: 2),
                                 ),
 
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(6),
                                   borderSide: BorderSide(
-                                      color: Colors.indigo.shade900,
+                                      color: Colors.blue.shade900,
                                       width: 2),
                                 )),
                           ),
@@ -240,4 +327,34 @@ class _INTRVCardState extends State<INTRVCard> {
         });
 
   }
+}
+
+enum ConfirmAction { Cancel, Accept }
+
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Generating excel sheet'),
+        content: const Text(
+            'This will generate excel sheet for intervention sheet of patient'),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
 }

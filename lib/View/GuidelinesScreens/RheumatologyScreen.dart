@@ -1,24 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/Model/Rheumatology.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Oncology.dart';
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class OncologyScreen extends StatefulWidget {
-  const OncologyScreen({Key? key}) : super(key: key);
-  static String id="oncology screen";
+class RheumatologyScreen extends StatefulWidget {
+  const RheumatologyScreen({Key? key}) : super(key: key);
+  static String id="rheumatology screen";
   static String code='';
 
   @override
-  State<OncologyScreen> createState() => _OncologyScreenState();
+  State<RheumatologyScreen> createState() => _RheumatologyScreenState();
 }
 
-class _OncologyScreenState extends State<OncologyScreen> {
+class _RheumatologyScreenState extends State<RheumatologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -27,7 +27,7 @@ class _OncologyScreenState extends State<OncologyScreen> {
 
 
     return DefaultTabController(
-      length: 5,
+      length: 1,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -47,7 +47,7 @@ class _OncologyScreenState extends State<OncologyScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -63,24 +63,21 @@ class _OncologyScreenState extends State<OncologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Oncology.option1),
-                Tab(text:Oncology.option2),
-                Tab(text:Oncology.option3),
-                Tab(text:Oncology.option4),
-                Tab(text:Oncology.option5),
+                Tab(text:Rheumatology.option1),
+
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Oncology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Rheumatology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -90,11 +87,7 @@ class _OncologyScreenState extends State<OncologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "oncology", subType: Oncology.option1,),
-              GuidelinesListScreen(type: "oncology", subType: Oncology.option2,),
-              GuidelinesListScreen(type: "oncology", subType: Oncology.option3,),
-              GuidelinesListScreen(type: "oncology", subType: Oncology.option4,),
-              GuidelinesListScreen(type: "oncology", subType: Oncology.option5,),
+              GuidelinesListScreen(type: "rheumatology", subType: Rheumatology.option1,),
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

@@ -1,20 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/CNSScreen.dart';
-import 'package:gppsupporters/View/CardiologyScreen.dart';
-import 'package:gppsupporters/View/DermatologyScreen.dart';
-import 'package:gppsupporters/View/GuidelineOptionCard.dart';
-import 'package:gppsupporters/View/HepatologyScreen.dart';
-import 'package:gppsupporters/View/ImmunologyScreen.dart';
-import 'package:gppsupporters/View/NerphologyScreen.dart';
-import 'package:gppsupporters/View/OncologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/CNSScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/CardiologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/DermatologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelineOptionCard.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/HepatologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/ImmunologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/NerphologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/OncologyScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Geriatrics.dart';
+import '../../Model/Geriatrics.dart';
 import 'EndocrinologyScreen.dart';
 import 'GastroenologyScreen.dart';
 import 'GeriatricsScreen.dart';
-import 'LoginScreen.dart';
+import '../LoginScreen.dart';
 import 'RheumatologyScreen.dart';
 
 class GuidelinesOptionsScreen extends StatefulWidget {
@@ -84,7 +84,7 @@ class _GuidelinesOptionsScreenState extends State<GuidelinesOptionsScreen> {
                               hintStyle: TextStyle(color: Colors.grey),
                               prefixIcon: Icon(
                                 Icons.search,
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                               ),
                               fillColor: Colors.white,
                               contentPadding: const EdgeInsets.symmetric(
@@ -101,7 +101,7 @@ class _GuidelinesOptionsScreenState extends State<GuidelinesOptionsScreen> {
             : Center(
                 child: Text(
                   'Guidelines',
-                  style: TextStyle(color: Colors.indigo.shade900),
+                  style: TextStyle(color: Colors.blue.shade900),
                   textAlign: TextAlign.left,
                 ),
               ),
@@ -116,7 +116,7 @@ class _GuidelinesOptionsScreenState extends State<GuidelinesOptionsScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   search ? Icons.search_off : Icons.search,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: () {
               setState(() {
@@ -129,7 +129,7 @@ class _GuidelinesOptionsScreenState extends State<GuidelinesOptionsScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   Icons.output_sharp,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: () async {
               final auth = FirebaseAuth.instance;

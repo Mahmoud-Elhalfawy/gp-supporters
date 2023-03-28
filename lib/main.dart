@@ -6,19 +6,20 @@ import 'package:gppsupporters/Model/Endocrinology.dart';
 import 'package:gppsupporters/Model/Rheumatology.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
 import 'package:gppsupporters/Utils/LabsTable.dart';
-import 'package:gppsupporters/View/CNSScreen.dart';
-import 'package:gppsupporters/View/CardiologyScreen.dart';
+import 'package:gppsupporters/View/AboutusScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/CNSScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/CardiologyScreen.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
 import 'package:gppsupporters/View/DashboardView.dart';
-import 'package:gppsupporters/View/DermatologyScreen.dart';
-import 'package:gppsupporters/View/GastroenologyScreen.dart';
-import 'package:gppsupporters/View/GeriatricsScreen.dart';
-import 'package:gppsupporters/View/GuidelineView.dart';
-import 'package:gppsupporters/View/GuildelinesOptionsScreen.dart';
-import 'package:gppsupporters/View/HepatologyScreen.dart';
-import 'package:gppsupporters/View/ImmunologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/DermatologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GastroenologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GeriatricsScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelineView.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuildelinesOptionsScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/HepatologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/ImmunologyScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
-import 'package:gppsupporters/View/NerphologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/NerphologyScreen.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
 import 'package:gppsupporters/View/OncoScreen.dart';
 import 'package:gppsupporters/View/PatientsScreen.dart';
@@ -31,10 +32,10 @@ import 'DatabaseUtils/keys.dart';
 import 'Model/Client.dart';
 import 'SplashScreen.dart';
 import 'View/CelebrateScreen.dart';
-import 'View/EndocrinologyScreen.dart';
+import 'View/GuidelinesScreens/EndocrinologyScreen.dart';
 import 'View/LoginScreen.dart';
-import 'View/OncologyScreen.dart';
-import 'View/RheumatologyScreen.dart';
+import 'View/GuidelinesScreens/OncologyScreen.dart';
+import 'View/GuidelinesScreens/RheumatologyScreen.dart';
 import 'View/SignupScreen.dart';
 
 void main() async{
@@ -115,6 +116,7 @@ class MyApp extends StatelessWidget {
           NephrologyScreen.id:(context)=>NephrologyScreen(),
 
           CelebrateScreen.id:(context)=>CelebrateScreen(),
+          AboutusScreen.id:(context)=>AboutusScreen(),
           //   CheckPatientScreen.id:(context)=>CheckPatientScreen(),
         }
     );

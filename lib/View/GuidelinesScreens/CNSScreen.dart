@@ -1,24 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/Model/Rheumatology.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/CNS.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class RheumatologyScreen extends StatefulWidget {
-  const RheumatologyScreen({Key? key}) : super(key: key);
-  static String id="rheumatology screen";
+class CNSScreen extends StatefulWidget {
+  const CNSScreen({Key? key}) : super(key: key);
+  static String id="cns screen";
   static String code='';
 
   @override
-  State<RheumatologyScreen> createState() => _RheumatologyScreenState();
+  State<CNSScreen> createState() => _CNSScreenState();
 }
 
-class _RheumatologyScreenState extends State<RheumatologyScreen> {
+class _CNSScreenState extends State<CNSScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -27,7 +27,7 @@ class _RheumatologyScreenState extends State<RheumatologyScreen> {
 
 
     return DefaultTabController(
-      length: 1,
+      length: 3,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -47,7 +47,7 @@ class _RheumatologyScreenState extends State<RheumatologyScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -63,21 +63,23 @@ class _RheumatologyScreenState extends State<RheumatologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Rheumatology.option1),
+                Tab(text:CNS.option1),
+                Tab(text:CNS.option2),
+                Tab(text:CNS.option3),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Rheumatology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'CNS',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -87,7 +89,9 @@ class _RheumatologyScreenState extends State<RheumatologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "rheumatology", subType: Rheumatology.option1,),
+              GuidelinesListScreen(type: "cns", subType: CNS.option1,),
+              GuidelinesListScreen(type: "cns", subType: CNS.option2,),
+              GuidelinesListScreen(type: "cns", subType: CNS.option3,),
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

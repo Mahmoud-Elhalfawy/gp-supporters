@@ -1,30 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/Model/Dermatology.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
-import 'package:gppsupporters/View/ProfileScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Oncology.dart';
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/Immunology.dart';
+import '../LoginScreen.dart';
 
-class DermatologyScreen extends StatefulWidget {
-  const DermatologyScreen({Key? key}) : super(key: key);
-  static String id="dermatology screen";
+class ImmunologyScreen extends StatefulWidget {
+  const ImmunologyScreen({Key? key}) : super(key: key);
+  static String id="immunology screen";
   static String code='';
 
   @override
-  State<DermatologyScreen> createState() => _DermatologyScreenState();
+  State<ImmunologyScreen> createState() => _ImmunologyScreenState();
 }
 
-class _DermatologyScreenState extends State<DermatologyScreen> {
+class _ImmunologyScreenState extends State<ImmunologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -33,7 +25,7 @@ class _DermatologyScreenState extends State<DermatologyScreen> {
 
 
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -52,8 +44,8 @@ class _DermatologyScreenState extends State<DermatologyScreen> {
 
               InkWell(
                 child: Container(
-                    margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    margin: const EdgeInsets.only(right: 16),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -69,21 +61,22 @@ class _DermatologyScreenState extends State<DermatologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Dermatology.option1),
+                Tab(text:Immunology.option1),
+                Tab(text:Immunology.option2.toUpperCase()),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Dermatology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Immunology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -93,7 +86,8 @@ class _DermatologyScreenState extends State<DermatologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "dermatology", subType: Dermatology.option1,),
+              GuidelinesListScreen(type: "immunology", subType: Immunology.option1,),
+              GuidelinesListScreen(type: "immunology", subType: Immunology.option2,),
 
 
 

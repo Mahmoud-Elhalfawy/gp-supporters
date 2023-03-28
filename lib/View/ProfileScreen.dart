@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -74,8 +74,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs: const [
@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(height: 10,),
                   Row(
                     children: [
-                      Icon(Icons.numbers_rounded,color: Colors.indigo.shade900,),
+                      Icon(Icons.numbers_rounded,color: Colors.blue.shade900,),
                       SizedBox(width: 10,),
 
                       Text(args.code, style: TextStyle(color: Colors.black),),

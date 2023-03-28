@@ -24,7 +24,7 @@ class _GuidelineViewState extends State<GuidelineView> {
       appBar: AppBar(
 
         leading: Icon(Icons.menu, color: Colors.transparent,),
-        title: Text('Guidelines', style: TextStyle(color: Colors.indigo.shade900),textAlign: TextAlign.left,),
+        title: Text('Guidelines', style: TextStyle(color: Colors.blue.shade900),textAlign: TextAlign.left,),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
@@ -81,7 +81,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:   Text("1. Cardiology ",
                                         style: TextStyle(
-                                            color: Colors.indigo.shade900,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -92,7 +92,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       }
                                   ),
 
-                                  InkWell(child: Icon(cardiology?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.indigo.shade900, size: 50,),
+                                  InkWell(child: Icon(cardiology?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.blue.shade900, size: 50,),
                                   onTap: (){
                                     setState(() {
                                       cardiology=!cardiology;
@@ -456,7 +456,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:   Text("2. AHA Guidelines ",
                                         style: TextStyle(
-                                            color: Colors.indigo.shade900,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -466,7 +466,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                         launchUrl(Uri.parse('https://professional.heart.org/en/guidelines-and-statements'),mode: LaunchMode.externalApplication);
                                       }
                                   ),
-                                  InkWell(child: Icon(aha?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.indigo.shade900, size: 50,),
+                                  InkWell(child: Icon(aha?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.blue.shade900, size: 50,),
                                     onTap: (){
                                       setState(() {
                                         aha=!aha;
@@ -667,7 +667,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       GestureDetector(
                                           child:   Text("3. Hepatology - AASLD Guidelines ",
                                             style: TextStyle(
-                                                color: Colors.indigo.shade900,
+                                                color: Colors.blue.shade900,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
                                                 decoration: TextDecoration.underline
@@ -678,7 +678,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                           }
                                       ),
 
-                                      InkWell(child: Icon(hepa1?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.indigo.shade900, size: 50,),
+                                      InkWell(child: Icon(hepa1?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.blue.shade900, size: 50,),
                                         onTap: (){
                                           setState(() {
                                             hepa1=!hepa1;
@@ -858,7 +858,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                   GestureDetector(
                                       child:   Text("4. Hepatology - EASL Guidelines ",
                                         style: TextStyle(
-                                            color: Colors.indigo.shade900,
+                                            color: Colors.blue.shade900,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
                                             decoration: TextDecoration.underline
@@ -869,7 +869,7 @@ class _GuidelineViewState extends State<GuidelineView> {
                                       }
                                   ),
 
-                                  InkWell(child: Icon(hepa2?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.indigo.shade900, size: 50,),
+                                  InkWell(child: Icon(hepa2?Icons.arrow_drop_up:Icons.arrow_drop_down, color: Colors.blue.shade900, size: 50,),
                                     onTap: (){
                                       setState(() {
                                         hepa2=!hepa2;

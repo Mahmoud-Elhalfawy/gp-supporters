@@ -114,9 +114,9 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               activeText: "name",
                               inactiveText: "code",
                               showOnOff: true,
-                              // activeTextColor: Colors.indigo.shade900,
+                              // activeTextColor: Colors.blue.shade900,
                               // inactiveTextColor: Colors.green.shade900,
-                              activeColor: Colors.indigo.shade900,
+                              activeColor: Colors.blue.shade900,
                               inactiveColor: Colors.green.shade900,
                               value: searchCriteria,
                               onToggle: (val) {
@@ -159,7 +159,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                                     hintStyle: TextStyle(color: Colors.grey),
                                     prefixIcon: Icon(
                                       Icons.search,
-                                      color: Colors.indigo.shade900,
+                                      color: Colors.blue.shade900,
                                     ),
                                     fillColor: Colors.white,
                                     contentPadding: const EdgeInsets.symmetric(
@@ -176,7 +176,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   : Center(
                       child: Text(
                         'Patient Profiles',
-                        style: TextStyle(color: Colors.indigo.shade900),
+                        style: TextStyle(color: Colors.blue.shade900),
                         textAlign: TextAlign.left,
                       ),
                     ),
@@ -191,7 +191,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       margin: EdgeInsets.only(right: 16),
                       child: Icon(
                         search ? Icons.search_off : Icons.search,
-                        color: Colors.indigo.shade900,
+                        color: Colors.blue.shade900,
                       )),
                   onTap: () {
                     setState(() {
@@ -204,7 +204,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                       margin: EdgeInsets.only(right: 16),
                       child: Icon(
                         Icons.output_sharp,
-                        color: Colors.indigo.shade900,
+                        color: Colors.blue.shade900,
                       )),
                   onTap: () async {
                     final auth = FirebaseAuth.instance;
@@ -231,7 +231,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                 onPressed: () {
                   Navigator.pushNamed(context, NewProfileScreen.id);
                 },
-                backgroundColor: Colors.indigo.shade900,
+                backgroundColor: Colors.blue.shade900,
                 child: const Icon(
                   Icons.add,
                   color: Colors.white,
@@ -299,7 +299,7 @@ class _PatientsScreenState extends State<PatientsScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                               side: BorderSide(
-                                color: Colors.indigo.shade900,
+                                color: Colors.blue.shade900,
                               ),
                             ),
                             child: ListTile(

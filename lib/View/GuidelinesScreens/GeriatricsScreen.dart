@@ -1,24 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/Model/Geriatrics.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/CNS.dart';
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class CNSScreen extends StatefulWidget {
-  const CNSScreen({Key? key}) : super(key: key);
-  static String id="cns screen";
+class GeriatricsScreen extends StatefulWidget {
+  const GeriatricsScreen({Key? key}) : super(key: key);
+  static String id="geriatrics screen";
   static String code='';
 
   @override
-  State<CNSScreen> createState() => _CNSScreenState();
+  State<GeriatricsScreen> createState() => _GeriatricsScreenState();
 }
 
-class _CNSScreenState extends State<CNSScreen> {
+class _GeriatricsScreenState extends State<GeriatricsScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -27,7 +27,7 @@ class _CNSScreenState extends State<CNSScreen> {
 
 
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -47,7 +47,7 @@ class _CNSScreenState extends State<CNSScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -63,23 +63,22 @@ class _CNSScreenState extends State<CNSScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:CNS.option1),
-                Tab(text:CNS.option2),
-                Tab(text:CNS.option3),
+                Tab(text:Geriatrics.option1),
+                Tab(text:Geriatrics.option2),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'CNS',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Geriatrics',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -89,9 +88,8 @@ class _CNSScreenState extends State<CNSScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "cns", subType: CNS.option1,),
-              GuidelinesListScreen(type: "cns", subType: CNS.option2,),
-              GuidelinesListScreen(type: "cns", subType: CNS.option3,),
+              GuidelinesListScreen(type: "geriatrics", subType: Geriatrics.option1,),
+              GuidelinesListScreen(type: "geriatrics", subType: Geriatrics.option2,),
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

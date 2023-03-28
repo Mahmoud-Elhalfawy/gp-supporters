@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
 class CardiologyScreen extends StatefulWidget {
   const CardiologyScreen({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _CardiologyScreenState extends State<CardiologyScreen> {
             InkWell(
               child: Container(
                   margin: EdgeInsets.only(right: 16),
-                  child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                  child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
               onTap: ()async{
                 final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -62,8 +62,8 @@ class _CardiologyScreenState extends State<CardiologyScreen> {
           ],
           bottom:   TabBar(
             labelColor:Colors.black,
-            dividerColor: Colors.indigo.shade900,
-            indicatorColor: Colors.indigo.shade900,
+            dividerColor: Colors.blue.shade900,
+            indicatorColor: Colors.blue.shade900,
             indicatorSize: TabBarIndicatorSize.label,
             isScrollable: true,
             tabs: const [
@@ -77,7 +77,7 @@ class _CardiologyScreenState extends State<CardiologyScreen> {
           title:  Center(
             child: Text(
               'Cardiology',
-              style: TextStyle(color: Colors.indigo.shade900),
+              style: TextStyle(color: Colors.blue.shade900),
               textAlign: TextAlign.left,
             ),
           )

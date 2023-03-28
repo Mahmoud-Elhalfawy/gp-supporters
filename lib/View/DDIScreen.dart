@@ -74,7 +74,7 @@ class _DDIScreenState extends State<DDIScreen> {
                         hintStyle: TextStyle(color: Colors.grey),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: Colors.indigo.shade900,
+                          color: Colors.blue.shade900,
                         ),
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.symmetric(
@@ -91,7 +91,7 @@ class _DDIScreenState extends State<DDIScreen> {
             : Center(
           child: Text(
             'DDI',
-            style: TextStyle(color: Colors.indigo.shade900),
+            style: TextStyle(color: Colors.blue.shade900),
             textAlign: TextAlign.left,
           ),
         ),
@@ -106,7 +106,7 @@ class _DDIScreenState extends State<DDIScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   search?Icons.search_off:Icons.search,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: () {
               setState(() {
@@ -120,7 +120,7 @@ class _DDIScreenState extends State<DDIScreen> {
                 margin: EdgeInsets.only(right: 16),
                 child: Icon(
                   Icons.output_sharp,
-                  color: Colors.indigo.shade900,
+                  color: Colors.blue.shade900,
                 )),
             onTap: ()async {
               final auth = FirebaseAuth.instance;

@@ -1,22 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/Immunology.dart';
-import 'LoginScreen.dart';
+import '../../Model/Client.dart';
+import '../../Model/Gastroenology.dart';
+import '../../Model/Nephrology.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class ImmunologyScreen extends StatefulWidget {
-  const ImmunologyScreen({Key? key}) : super(key: key);
-  static String id="immunology screen";
+class NephrologyScreen extends StatefulWidget {
+  const NephrologyScreen({Key? key}) : super(key: key);
+  static String id="nephrology screen";
   static String code='';
 
   @override
-  State<ImmunologyScreen> createState() => _ImmunologyScreenState();
+  State<NephrologyScreen> createState() => _NephrologyScreenState();
 }
 
-class _ImmunologyScreenState extends State<ImmunologyScreen> {
+class _NephrologyScreenState extends State<NephrologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -25,7 +28,7 @@ class _ImmunologyScreenState extends State<ImmunologyScreen> {
 
 
     return DefaultTabController(
-      length: 2,
+      length: 4,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -44,8 +47,8 @@ class _ImmunologyScreenState extends State<ImmunologyScreen> {
 
               InkWell(
                 child: Container(
-                    margin: const EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    margin: EdgeInsets.only(right: 16),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -61,22 +64,24 @@ class _ImmunologyScreenState extends State<ImmunologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Immunology.option1),
-                Tab(text:Immunology.option2.toUpperCase()),
+                Tab(text:Nephrology.option1),
+                Tab(text:Nephrology.option2),
+                Tab(text:Nephrology.option3),
+                Tab(text:Nephrology.option4),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Immunology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Nephrology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -86,10 +91,21 @@ class _ImmunologyScreenState extends State<ImmunologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "immunology", subType: Immunology.option1,),
-              GuidelinesListScreen(type: "immunology", subType: Immunology.option2,),
+              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option1,),
+              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option2,),
+              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option3,),
+              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option4,),
 
-
+              // ADMScreen(code: ProfileScreen.code),
+              // LabsScreen(code: ProfileScreen.code),
+              // MedScreen(code: ProfileScreen.code,),
+              // VitalsScreen(code: ProfileScreen.code),
+              // OncoScreen(code: ProfileScreen.code),
+              //
+              // Icon(Icons.downloading),
+              // NotesScreen(code: ProfileScreen.code,),
+              // InterventionScreen(code: ProfileScreen.code,),
+              //
 
             ],
           ),

@@ -1,21 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/Model/Dermatology.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import 'LoginScreen.dart';
+import '../../Model/Oncology.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class HepatologyScreen extends StatefulWidget {
-  const HepatologyScreen({Key? key}) : super(key: key);
-  static String id="hepatology screen";
+class DermatologyScreen extends StatefulWidget {
+  const DermatologyScreen({Key? key}) : super(key: key);
+  static String id="dermatology screen";
   static String code='';
 
   @override
-  State<HepatologyScreen> createState() => _HepatologyScreenState();
+  State<DermatologyScreen> createState() => _DermatologyScreenState();
 }
 
-class _HepatologyScreenState extends State<HepatologyScreen> {
+class _DermatologyScreenState extends State<DermatologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -24,7 +33,7 @@ class _HepatologyScreenState extends State<HepatologyScreen> {
 
 
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -43,8 +52,8 @@ class _HepatologyScreenState extends State<HepatologyScreen> {
 
               InkWell(
                 child: Container(
-                    margin: const EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    margin: EdgeInsets.only(right: 16),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -60,22 +69,21 @@ class _HepatologyScreenState extends State<HepatologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
-              tabs: const [
+              tabs:  [
 
-                Tab(text:"AASLD"),
-                Tab(text:"EASL"),
+                Tab(text:Dermatology.option1),
 
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Hepatology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Dermatology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -85,8 +93,7 @@ class _HepatologyScreenState extends State<HepatologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "hepatology", subType: "aasld",),
-              GuidelinesListScreen(type: "hepatology", subType: "easl",),
+              GuidelinesListScreen(type: "dermatology", subType: Dermatology.option1,),
 
 
 

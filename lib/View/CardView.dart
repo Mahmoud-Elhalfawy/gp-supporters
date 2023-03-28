@@ -34,7 +34,7 @@ class _CardViewState extends State<CardView> {
                     borderRadius:
                     const BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
-                      color: Colors.indigo.shade900,
+                      color: Colors.blue.shade900,
                     ),
                   ),
                   child: ListTile(

@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:editable/editable.dart';
+import 'package:file_saver/file_saver.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../DatabaseUtils/LabSheetKeys.dart';
 import '../DatabaseUtils/OncoSheetKeys.dart';
 import '../Model/Client.dart';
+import 'package:flutter/foundation.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
+
+
 
 class OncoTable extends StatefulWidget {
     String code;
@@ -26,6 +34,65 @@ class _OncoTableState extends State<OncoTable> {
   TextEditingController heightController=TextEditingController();
   TextEditingController startDateController=TextEditingController();
 
+
+
+  Future<void> generateExcel(AsyncSnapshot<QuerySnapshot> snapshot) async {
+    // Map<String,dynamic> data=patient.originateData();
+    int row = 1;
+    int col = 1;
+    //Create a Excel document.
+    //Creating a workbook.
+    final Excel.Workbook workbook = Excel.Workbook();
+    //Accessing via index.
+    final Excel.Worksheet sheet = workbook.worksheets[0];
+
+    // Set the text value.
+    for (var column in cols) {
+      sheet.getRangeByIndex(row, col).setText(column['title']);
+      col++;
+    }
+
+    row = row + 1;
+    for (var rowV in returnedRows) {
+      col = 1;
+      for (var column in cols) {
+        sheet
+            .getRangeByIndex(row, col)
+            .setText(rowV[column['key'].toString()] ?? "-");
+        col++;
+      }
+      row++;
+    }
+
+    if (!kIsWeb) {
+      if (Platform.isIOS || Platform.isAndroid || Platform.isMacOS) {
+        bool status = await Permission.storage.isGranted;
+
+        if (!status) await Permission.storage.request();
+      }
+    }
+
+    showToast("Onco cycle sheet saved succesfully");
+
+    List<int> sheets = workbook.saveAsStream();
+
+    workbook.dispose();
+    Uint8List dataList = Uint8List.fromList(sheets);
+    MimeType type = MimeType.MICROSOFTEXCEL;
+    String path = await FileSaver.instance
+        .saveAs("onco Cycle ${widget.tableIndex} - ${widget.code}", dataList, "xlsx", type);
+    print(path);
+  }
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
 
   List cols = [
     {"title": 'Drug Name', 'widthFactor': 0.4, 'key': 'drugName', 'editable': true,},
@@ -163,7 +230,24 @@ class _OncoTableState extends State<OncoTable> {
           int rowLength=returnedRows.length;
           for(int i=0; i<9-rowLength;i++) {
             Map<String,dynamic> newRow={};
+            if(i==6-rowLength){
+              newRow={
+                "drugName":"E.F.",
 
+              };
+            }
+            if(i==7-rowLength){
+              newRow={
+                "drugName":"Myelogram Blast",
+
+              };
+            }
+            if(i==8-rowLength){
+              newRow={
+                "drugName":"Dose Cumulative",
+
+              };
+            }
             for(var singleCol in cols){
               if(!newRow.containsKey(singleCol['key'])){
                 print("missing $singleCol");
@@ -190,6 +274,29 @@ class _OncoTableState extends State<OncoTable> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+
+                FloatingActionButton(
+                  // label: const Text(
+                  //   'Save',
+                  //   style: TextStyle(color: Colors.white),
+                  // ), // <-- Text
+                  backgroundColor: Colors.grey.shade600,
+                  child: const Icon(
+                    // <-- Icon
+                    Icons.print,
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    final ConfirmAction action =
+                    (await _asyncConfirmDialog(context))!;
+
+                    if (action == ConfirmAction.Accept) {
+                      await generateExcel(snapshot);
+                    }
+                  },
+                ),
+
+                 SizedBox(height: 10,),
                  Row(
                    mainAxisSize: MainAxisSize.max,
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -202,7 +309,7 @@ class _OncoTableState extends State<OncoTable> {
 
                           hintText: "BSA",
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
+                            borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
                           ),
 
                         ),
@@ -218,7 +325,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "Weight",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
                            ),
 
                          ),
@@ -236,7 +343,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "Height",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
                            ),
 
                          ),
@@ -253,7 +360,7 @@ class _OncoTableState extends State<OncoTable> {
 
                            hintText: "St Date",
                            border: OutlineInputBorder(
-                             borderSide: BorderSide(width: 7, color: Colors.indigo.shade900),
+                             borderSide: BorderSide(width: 7, color: Colors.blue.shade900),
                            ),
 
                          ),
@@ -268,7 +375,7 @@ class _OncoTableState extends State<OncoTable> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(color: Colors.indigo.shade900, width: 1.2)
+                      border: Border.all(color: Colors.blue.shade900, width: 1.2)
                   ),
                   // margin: EdgeInsets.only(bottom: 16),
                   height: MediaQuery.of(context).size.height*0.6,
@@ -327,4 +434,34 @@ class _OncoTableState extends State<OncoTable> {
 
         });
   }
+}
+
+enum ConfirmAction { Cancel, Accept }
+
+Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Generating excel sheet'),
+        content: const Text(
+            'This will generate excel sheet for onco sheet of patient'),
+        actions: <Widget>[
+          ElevatedButton(
+            child: const Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Accept'),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
 }

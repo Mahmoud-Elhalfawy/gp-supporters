@@ -1,25 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gppsupporters/View/GuidelinesListScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/GuidelinesListScreen.dart';
 import 'package:gppsupporters/View/ProfileScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Model/Client.dart';
-import '../Model/Gastroenology.dart';
-import '../Model/Nephrology.dart';
-import '../Model/PatientArguments.dart';
-import 'LoginScreen.dart';
+import '../../Model/Oncology.dart';
+import '../../Model/Client.dart';
+import '../../Model/PatientArguments.dart';
+import '../LoginScreen.dart';
 
-class NephrologyScreen extends StatefulWidget {
-  const NephrologyScreen({Key? key}) : super(key: key);
-  static String id="nephrology screen";
+class OncologyScreen extends StatefulWidget {
+  const OncologyScreen({Key? key}) : super(key: key);
+  static String id="oncology screen";
   static String code='';
 
   @override
-  State<NephrologyScreen> createState() => _NephrologyScreenState();
+  State<OncologyScreen> createState() => _OncologyScreenState();
 }
 
-class _NephrologyScreenState extends State<NephrologyScreen> {
+class _OncologyScreenState extends State<OncologyScreen> {
   final auth = FirebaseAuth.instance;
 
   Client client=Client();
@@ -28,7 +27,7 @@ class _NephrologyScreenState extends State<NephrologyScreen> {
 
 
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         // resizeToAvoidBottomInset: false, // set it to false
 
@@ -48,7 +47,7 @@ class _NephrologyScreenState extends State<NephrologyScreen> {
               InkWell(
                 child: Container(
                     margin: EdgeInsets.only(right: 16),
-                    child: Icon(Icons.output_sharp, color: Colors.indigo.shade900)),
+                    child: Icon(Icons.output_sharp, color: Colors.blue.shade900)),
 
                 onTap: ()async{
                   final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -64,24 +63,24 @@ class _NephrologyScreenState extends State<NephrologyScreen> {
             ],
             bottom:   TabBar(
               labelColor:Colors.black,
-              dividerColor: Colors.indigo.shade900,
-              indicatorColor: Colors.indigo.shade900,
+              dividerColor: Colors.blue.shade900,
+              indicatorColor: Colors.blue.shade900,
               indicatorSize: TabBarIndicatorSize.label,
               isScrollable: true,
               tabs:  [
 
-                Tab(text:Nephrology.option1),
-                Tab(text:Nephrology.option2),
-                Tab(text:Nephrology.option3),
-                Tab(text:Nephrology.option4),
-
+                Tab(text:Oncology.option1),
+                Tab(text:Oncology.option2),
+                Tab(text:Oncology.option3),
+                Tab(text:Oncology.option4),
+                Tab(text:Oncology.option5),
 
               ],
             ),
             title:  Center(
               child: Text(
-                'Nephrology',
-                style: TextStyle(color: Colors.indigo.shade900),
+                'Oncology',
+                style: TextStyle(color: Colors.blue.shade900),
                 textAlign: TextAlign.left,
               ),
             )
@@ -91,10 +90,11 @@ class _NephrologyScreenState extends State<NephrologyScreen> {
           child:  TabBarView(
             children: [
 
-              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option1,),
-              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option2,),
-              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option3,),
-              GuidelinesListScreen(type: "Nephrology", subType: Nephrology.option4,),
+              GuidelinesListScreen(type: "oncology", subType: Oncology.option1,),
+              GuidelinesListScreen(type: "oncology", subType: Oncology.option2,),
+              GuidelinesListScreen(type: "oncology", subType: Oncology.option3,),
+              GuidelinesListScreen(type: "oncology", subType: Oncology.option4,),
+              GuidelinesListScreen(type: "oncology", subType: Oncology.option5,),
 
               // ADMScreen(code: ProfileScreen.code),
               // LabsScreen(code: ProfileScreen.code),

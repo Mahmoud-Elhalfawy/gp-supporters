@@ -269,7 +269,7 @@ class _MedScreenState extends State<MedScreen> {
                       label: const Text(
                         'Add row', style: TextStyle(color: Colors.white),),
                       // <-- Text
-                      backgroundColor: Colors.indigo.shade900,
+                      backgroundColor: Colors.blue.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add,
                         color: Colors.white,
@@ -303,7 +303,7 @@ class _MedScreenState extends State<MedScreen> {
                       label: const Text(
                           'Add column', style: TextStyle(color: Colors.white)),
                       // <-- Text
-                      backgroundColor: Colors.indigo.shade900,
+                      backgroundColor: Colors.blue.shade900,
                       icon: const Icon( // <-- Icon
                         Icons.add_box_outlined,
                         color: Colors.white,
@@ -321,7 +321,7 @@ class _MedScreenState extends State<MedScreen> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
                       border: Border.all(
-                          color: Colors.indigo.shade900, width: 1.2)
+                          color: Colors.blue.shade900, width: 1.2)
                   ),
                   // margin: EdgeInsets.only(bottom: 16),
                   height: MediaQuery
