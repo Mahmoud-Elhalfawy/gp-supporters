@@ -13,6 +13,7 @@ class Patient{
   String? allergy;
   String? workingUpDiagnosis;
   String? physicalAssesment;
+  String? admDate;
 
 
   void cloneData(Map<String,dynamic> data){
@@ -31,6 +32,7 @@ class Patient{
     allergy=data['allergy'];
     workingUpDiagnosis=data['workingUpDiagnosis'];
     physicalAssesment=data['physicalAssessment'];
+    admDate=data['admDate'];
 
   }
 
@@ -49,6 +51,7 @@ class Patient{
     data['allergy']=allergy;
     data['workingUpDiagnosis']=workingUpDiagnosis;
     data['physicalAssessment']=physicalAssesment;
+    data['admDate']=admDate;
 
     return data;
   }

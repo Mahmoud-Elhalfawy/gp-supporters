@@ -22,7 +22,8 @@ import '../Model/PatientArguments.dart';
 
 class ADMScreen extends StatefulWidget {
   String code;
-  ADMScreen({Key? key, required this.code}) : super(key: key);
+  String name;
+  ADMScreen({Key? key, required this.code, required this.name}) : super(key: key);
 
   @override
   State<ADMScreen> createState() => _ADMScreenState();
@@ -237,15 +238,54 @@ class _ADMScreenState extends State<ADMScreen> {
                             const BorderRadius.all(Radius.circular(5)),
                         border: Border.all(
                             color: Colors.blue.shade900, width: 1.2)),
-                    height: MediaQuery.of(context).size.height * 0.6,
+                    height: MediaQuery.of(context).size.height * 0.65,
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.max,
                           children: [
+
+                            Column(
+                              children: [
+                                Text(
+                                  "Admission Date: ",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.blue.shade900,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                AdvanceTextField(
+                                  text: dataBackEnd['admDate'],
+                                  animationDuration:
+                                  Duration(milliseconds: 200),
+                                  backgroundColor: Colors.blue.shade900,
+                                  type: AdvanceTextFieldType.EDIT,
+                                  editLabel: const Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
+                                  ),
+                                  saveLabel: const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  ),
+                                  textHint: 'enter admission date',
+                                  onEditTap: () {},
+                                  onSaveTap: (text) {
+                                    patient.admDate = text;
+                                    print('value is: $text');
+                                  },
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 25,
+                            ),
                             Column(
                               children: [
                                 Text(
@@ -284,6 +324,7 @@ class _ADMScreenState extends State<ADMScreen> {
                             SizedBox(
                               height: 25,
                             ),
+
                             Column(
                               children: [
                                 Text(
@@ -322,6 +363,12 @@ class _ADMScreenState extends State<ADMScreen> {
                             SizedBox(
                               height: 25,
                             ),
+
+
+
+
+
+
                             Column(
                               children: [
                                 Text(

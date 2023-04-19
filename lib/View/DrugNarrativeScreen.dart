@@ -1,20 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/View/CardView.dart';
+import 'package:link_text/link_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import 'CardView.dart';
 import 'LoginScreen.dart';
 
-class DDIScreen extends StatefulWidget {
-
-  static String id="DDI screen";
-  const DDIScreen({Key? key}) : super(key: key);
+class DrugNarrativeScreen extends StatefulWidget {
+  const DrugNarrativeScreen({Key? key}) : super(key: key);
+  static String id="DrugNarrativeScreen";
 
   @override
-  State<DDIScreen> createState() => _DDIScreenState();
+  State<DrugNarrativeScreen> createState() => _DrugNarrativeScreenState();
 }
 
-class _DDIScreenState extends State<DDIScreen> {
+class _DrugNarrativeScreenState extends State<DrugNarrativeScreen> {
+
   bool search = false;
   bool searchCriteria=true;
   String query="";
@@ -90,7 +93,7 @@ class _DDIScreenState extends State<DDIScreen> {
         )
             : Center(
           child: Text(
-            'DDI',
+            'Drug Narrative',
             style: TextStyle(color: Colors.blue.shade900),
             textAlign: TextAlign.left,
           ),
@@ -122,7 +125,7 @@ class _DDIScreenState extends State<DDIScreen> {
                   Icons.output_sharp,
                   color: Colors.blue.shade900,
                 )),
-            onTap: ()async {
+            onTap: () async{
               final auth = FirebaseAuth.instance;
 
               final ConfirmAction action = (await _asyncConfirmDialog(context))!;
@@ -157,7 +160,7 @@ class _DDIScreenState extends State<DDIScreen> {
                   children: <Widget>[
                     Expanded(
                         flex: 1,
-                        child: Image.asset('assets/img/drug.png', fit: BoxFit.contain,)),
+                        child: Image.asset('assets/img/pharmacy.png', fit: BoxFit.contain,)),
                     Expanded(
                       flex: 5,
                       child: Container(
@@ -202,27 +205,17 @@ class _DDIScreenState extends State<DDIScreen> {
 
 
 
-    calculators.add(CardView(title: "UpToDate", url: 'https://doctorabad.com/UpToDate/d/di.htm'),);
+    calculators.add(CardView(title: "PDR", url: 'https://pdr.net/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "Drugs.com ", url: 'https://www.drugs.com/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "Rxlist ", url: 'https://www.rxlist.com/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "Drug bank ", url: 'https://go.drugbank.com/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "FDA drug monograph ", url: 'https://www.fda.gov/drugs/development-approval-process-drugs/drug-approvals-and-databases',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "FDA ", url: 'https://www.fda.gov/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "Medline plus ", url: 'https://medlineplus.gov/druginformation.html',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "Drug monographs ", url: 'https://handbook.bcehs.ca/drug-monographs/',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "emc ", url: 'https://www.medicines.org.uk/emc',icon: "assets/img/pharmacy.png",),);
+    calculators.add(CardView(title: "DailyMed ", url: 'https://dailymed.nlm.nih.gov/dailymed/',icon: "assets/img/pharmacy.png",),);
 
-
-
-    calculators.add(CardView(title: "Medscape", url: 'https://reference.medscape.com/drug-interactionchecker'),
-    );
-
-
-    calculators.add(CardView(title: "Drugs.com ", url: 'https://www.drugs.com/drug_interactions.html'),
-    );
-
-
-
-    calculators.add(CardView(title: "WebMD", url: 'https://www.webmd.com/interaction-checker/default.htm'),
-    );
-
-
-
-    calculators.add(CardView(title: "Lexicomp", url: 'https://www.wolterskluwer.com/en/solutions/lexicomp/resources/lexicomp-user-academy/drug-interactions-analysis'),
-    );
-    calculators.add(CardView(title: "Stockleys Drug Interactions 2015", url: "https://drive.google.com/file/d/1i-cITBhcTwgJzqkz3R7-CgOuFVl0GAfJ/view?usp=sharing"));
 
 
   }
@@ -258,5 +251,4 @@ Future<ConfirmAction?> _asyncConfirmDialog(BuildContext context) async {
     },
   );
 }
-
 

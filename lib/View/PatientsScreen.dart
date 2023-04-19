@@ -247,12 +247,12 @@ class _PatientsScreenState extends State<PatientsScreen> {
                   return Slidable(
                     // Specify a key if the Slidable is dismissible.
                     // key: const ValueKey(0),
-                    startActionPane: const ActionPane(
+                    startActionPane:  ActionPane(
                       motion: ScrollMotion(),
                       children: [
                         SlidableAction(
                           flex: 1,
-                          onPressed: navigate,
+                          onPressed: (context){navigate(context, patient: patientListFiltered[index]);},
                           backgroundColor: Colors.green,
                           foregroundColor: Colors.white,
                           icon: Icons.share,
@@ -350,8 +350,8 @@ class _PatientsScreenState extends State<PatientsScreen> {
 }
 
 void doNothing(BuildContext context, var snapshot) {}
-void navigate(BuildContext context) {
-  Navigator.pushNamed(context, ShareScreen.id);
+void navigate(BuildContext context, {required Patient patient}) {
+  Navigator.pushNamed(context, ShareScreen.id, arguments: PatientArguments(patient.name!, patient.hCode!));
 }
 
 

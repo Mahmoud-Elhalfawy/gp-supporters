@@ -19,7 +19,8 @@ import '../Model/Client.dart';
 class MedScreen extends StatefulWidget {
 
   String code;
-   MedScreen({Key? key, required this.code}) : super(key: key);
+  String name;
+   MedScreen({Key? key, required this.code,required this.name}) : super(key: key);
 
   @override
   State<MedScreen> createState() => _MedScreenState();
@@ -80,7 +81,9 @@ class _MedScreenState extends State<MedScreen> {
       sheet.getRangeByIndex(row, col).setText(column['title']);
       col++;
     }
+    sheet.getRangeByIndex(row, col).setText("patient name");
 
+    sheet.getRangeByIndex(2, col).setText(widget.name);
     row=row+1;
     for(var rowV in returnedRows){
       col=1;

@@ -14,8 +14,9 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
 
 class LabsScreen extends StatefulWidget {
   String code;
+  String name;
 
-  LabsScreen({Key? key, required this.code}) : super(key: key);
+  LabsScreen({Key? key, required this.code, required this.name}) : super(key: key);
 
   @override
   State<LabsScreen> createState() => _LabsScreenState();
@@ -27,7 +28,32 @@ class _LabsScreenState extends State<LabsScreen> {
   List returnedRows = [];
   Client client = Client();
 
-  List rows = [];
+  List rows = [
+    {"lab":"Date"},
+    {"lab": "Hb\n13-17 g/dL (m)\n12-15 g/dL (f)"},
+    {"lab": "PLT\n150-400 10^3/u"},
+    {"lab": "WBC\n4-11 x 10^3/uL"},
+    {"lab": "Neutrophils\n2 - 8 x 10^9/L"},
+    {"lab": "INR\n0-1.2"},
+    {"lab": "PT\n9.8-12.1 sec"},
+    {"lab": "a-PTT\n26-40 sec"},
+    {"lab": "S. Cr\n0.7-1.3 mg/dL"},
+    {"lab": "CrCl\n97-137 L/min (m)\n88-128 L/min (f)"},
+    {"lab": "Urea\n15-45 g/dl"},
+    {"lab": "BUN\n\n7-18 mg/dL"},
+    {"lab": "SGOT\n15-37 U/L"},
+    {"lab": "SGPT\n16-63 U/L"},
+    {"lab": "T. bilirubin\n0-1 mg/dl"},
+    {"lab": "D.bilirubin\n0-0.3 mg/dl"},
+    {"lab": "Total Protein\n6.4-8.2 g/dl"},
+    {"lab": "Albumin\n3.4-5 g/dl"},
+    {"lab": "Na+\n135-145 mmol/L"},
+    {"lab": "K+\n3.5-5.1 mmol/L"},
+    {"lab": "Ca++\n8.4-10.2 mg/dL"},
+    {"lab": "C.Ca\n8.4-10.2 mg/dL"},
+    {"lab": "P\n2.5-4.9 mg/dl"},
+    {"lab": "Uric acid\n3.5-7.2 mg/dl"}
+  ];
   List cols = [
     {
       "title": 'Lab',
@@ -47,8 +73,6 @@ class _LabsScreenState extends State<LabsScreen> {
     {"title": '10', 'key': '10'},
   ];
 
-
-
   Future<void> generateExcel(AsyncSnapshot<QuerySnapshot> snapshot) async {
     // Map<String,dynamic> data=patient.originateData();
     int row = 1;
@@ -64,6 +88,10 @@ class _LabsScreenState extends State<LabsScreen> {
       sheet.getRangeByIndex(row, col).setText(column['title']);
       col++;
     }
+
+    sheet.getRangeByIndex(row, col).setText("patient name");
+
+    sheet.getRangeByIndex(2, col).setText(widget.name);
 
     row = row + 1;
     for (var rowV in returnedRows) {
@@ -173,9 +201,13 @@ class _LabsScreenState extends State<LabsScreen> {
     dataToBackend.putIfAbsent(LabSheetKeys.user, () => client.token);
     if (value['lab'] != null) {
       dataToBackend.putIfAbsent(LabSheetKeys.labName, () => value['lab']);
-    }
+    } else{
 
-    dataToBackend.putIfAbsent("hCode", () => widget.code);
+      print("real value of lab : ${rows[value['row']]['lab']}");
+      dataToBackend.putIfAbsent(LabSheetKeys.labName, () => rows[value['row']]['lab']);
+
+    }
+      dataToBackend.putIfAbsent("hCode", () => widget.code);
     value.keys.forEach((k) => dataToBackend.putIfAbsent(k, () => value[k]));
 
     // dataToBackend.addAll(value);
@@ -183,6 +215,7 @@ class _LabsScreenState extends State<LabsScreen> {
     await save(dataToBackend, snapshot);
 
     print("data to backend : : $dataToBackend");
+    print("returned row  : ${returnedRows[0]}");
   }
 
   ///Print only edited rows.
@@ -207,8 +240,9 @@ class _LabsScreenState extends State<LabsScreen> {
           var rowsBackend = snapshot.data?.docs.where((element) =>
               element['user'] == client.token &&
               element['hCode'] == widget.code);
-          returnedRows = [];
+
           if (rowsBackend != null && rowsBackend.isNotEmpty) {
+            returnedRows = [];
             for (var row in rowsBackend) {
               Map<String, dynamic> rowData = row.data() as Map<String, dynamic>;
 
@@ -224,77 +258,36 @@ class _LabsScreenState extends State<LabsScreen> {
             });
           }
 
-
-          if(returnedRows.isEmpty){
-            returnedRows.add({
-              "lab":"Hb\n13-17 g/dL (m)\n12-15 g/dL (f)"
-            });
-            returnedRows.add({
-              "lab":"PLT\n150-400 10^3/u"
-            });
-            returnedRows.add({
-              "lab": "WBC\n4-11 x 10^3/uL"
-            });
-            returnedRows.add({
-              "lab": "Neutrophils\n2 - 8 x 10^9/L"
-            });
-            returnedRows.add({
-              "lab":"INR\n0-1.2"
-            });
-            returnedRows.add({
-              "lab":"PT\n9.8-12.1 sec"
-            });
-            returnedRows.add({
-              "lab":"a-PTT\n26-40 sec"
-            });
-            returnedRows.add({
-              "lab": "S. Cr\n0.7-1.3 mg/dL"
-            });returnedRows.add({
-              "lab": "CrCl\n97-137 L/min (m)\n88-128 L/min (f)"
-            });
-            returnedRows.add({
-              "lab":"Urea\n15-45 g/dl"
-            });
-            returnedRows.add({
-              "lab":"BUN\n\n7-18 mg/dL"
-            });
-            returnedRows.add({
-              "lab" : "SGOT\n15-37 U/L"
-
-            });returnedRows.add({
-              "lab" : "SGPT\n16-63 U/L"
-            });
-            returnedRows.add({
-              "lab": "T. bilirubin\n0-1 mg/dl"
-            });
-            returnedRows.add({
-              "lab" : "D.bilirubin\n0-0.3 mg/dl"
-
-            });
-            returnedRows.add({
-              "lab": "Total Protein\n6.4-8.2 g/dl"
-            });returnedRows.add({
-              "lab" : "Albumin\n3.4-5 g/dl"
-            });returnedRows.add({
-              "lab": "Na+\n135-145 mmol/L"
-            });
-            returnedRows.add({
-              "lab": "K+\n3.5-5.1 mmol/L"
-            });
-            returnedRows.add({
-              "lab": "Ca++\n8.4-10.2 mg/dL"
-            });
-            returnedRows.add({
-              "lab":"C.Ca\n8.4-10.2 mg/dL"
-            });
-            returnedRows.add({
-              "lab" : "P\n2.5-4.9 mg/dl"
-            });
-            returnedRows.add({
-              "lab" : "Uric acid\n3.5-7.2 mg/dl"
-            });
+          if(rows.length>returnedRows.length) {
+            for (int i = returnedRows.length; i < rows.length; i++) {
+              returnedRows.add(rows[i]);
+            }
           }
-
+          // if (returnedRows.isEmpty) {
+          //   returnedRows.add({"lab": "Hb\n13-17 g/dL (m)\n12-15 g/dL (f)"});
+          //   returnedRows.add({"lab": "PLT\n150-400 10^3/u"});
+          //   returnedRows.add({"lab": "WBC\n4-11 x 10^3/uL"});
+          //   returnedRows.add({"lab": "Neutrophils\n2 - 8 x 10^9/L"});
+          //   returnedRows.add({"lab": "INR\n0-1.2"});
+          //   returnedRows.add({"lab": "PT\n9.8-12.1 sec"});
+          //   returnedRows.add({"lab": "a-PTT\n26-40 sec"});
+          //   returnedRows.add({"lab": "S. Cr\n0.7-1.3 mg/dL"});
+          //   returnedRows.add({"lab": "CrCl\n97-137 L/min (m)\n88-128 L/min (f)"});
+          //   returnedRows.add({"lab": "Urea\n15-45 g/dl"});
+          //   returnedRows.add({"lab": "BUN\n\n7-18 mg/dL"});
+          //   returnedRows.add({"lab": "SGOT\n15-37 U/L"});
+          //   returnedRows.add({"lab": "SGPT\n16-63 U/L"});
+          //   returnedRows.add({"lab": "T. bilirubin\n0-1 mg/dl"});
+          //   returnedRows.add({"lab": "D.bilirubin\n0-0.3 mg/dl"});
+          //   returnedRows.add({"lab": "Total Protein\n6.4-8.2 g/dl"});
+          //   returnedRows.add({"lab": "Albumin\n3.4-5 g/dl"});
+          //   returnedRows.add({"lab": "Na+\n135-145 mmol/L"});
+          //   returnedRows.add({"lab": "K+\n3.5-5.1 mmol/L"});
+          //   returnedRows.add({"lab": "Ca++\n8.4-10.2 mg/dL"});
+          //   returnedRows.add({"lab": "C.Ca\n8.4-10.2 mg/dL"});
+          //   returnedRows.add({"lab": "P\n2.5-4.9 mg/dl"});
+          //   returnedRows.add({"lab": "Uric acid\n3.5-7.2 mg/dl"});
+          // }
 
           for (Map<String, dynamic> rowData in returnedRows) {
             for (var singleCol in cols) {
@@ -373,8 +366,8 @@ class _LabsScreenState extends State<LabsScreen> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),
-                      border: Border.all(
-                          color: Colors.blue.shade900, width: 1.2)),
+                      border:
+                          Border.all(color: Colors.blue.shade900, width: 1.2)),
                   // margin: EdgeInsets.only(bottom: 16),
                   height: MediaQuery.of(context).size.height * 0.6,
                   child: Editable(

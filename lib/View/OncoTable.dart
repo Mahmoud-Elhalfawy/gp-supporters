@@ -17,7 +17,8 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
 class OncoTable extends StatefulWidget {
     String code;
     int tableIndex;
-   OncoTable({Key? key,required this.code,required this.tableIndex}) : super(key: key);
+    String name;
+   OncoTable({Key? key,required this.code,required this.tableIndex,required this.name}) : super(key: key);
 
   @override
   State<OncoTable> createState() => _OncoTableState();
@@ -51,7 +52,9 @@ class _OncoTableState extends State<OncoTable> {
       sheet.getRangeByIndex(row, col).setText(column['title']);
       col++;
     }
+    sheet.getRangeByIndex(row, col).setText("patient name");
 
+    sheet.getRangeByIndex(2, col).setText(widget.name);
     row = row + 1;
     for (var rowV in returnedRows) {
       col = 1;

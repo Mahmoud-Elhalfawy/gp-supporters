@@ -23,7 +23,8 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
 class NoteCard extends StatefulWidget {
   String code;
   int noteIndex;
-   NoteCard({Key? key,required this.code,required this.noteIndex}) : super(key: key);
+  String name;
+   NoteCard({Key? key,required this.code,required this.noteIndex, required this.name}) : super(key: key);
 
   @override
   State<NoteCard> createState() => _NoteCardState();
@@ -56,6 +57,11 @@ class _NoteCardState extends State<NoteCard> {
       sheet.getRangeByIndex(row, col).setText(title);
       col++;
     }
+
+
+    sheet.getRangeByIndex(row, col).setText("patient name");
+
+    sheet.getRangeByIndex(2, col).setText(widget.name);
 
     row = row + 1;
 

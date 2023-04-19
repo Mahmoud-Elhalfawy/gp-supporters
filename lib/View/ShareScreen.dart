@@ -3,9 +3,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gppsupporters/DatabaseUtils/InterventionSheetKeys.dart';
+import 'package:gppsupporters/DatabaseUtils/MedSheetKey.dart';
+import 'package:gppsupporters/DatabaseUtils/NotesSheetKeys.dart';
+import 'package:gppsupporters/DatabaseUtils/OncoSheetKeys.dart';
+import 'package:gppsupporters/DatabaseUtils/VitalsSheetKey.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../DatabaseUtils/ADMSheetKeys.dart';
+import '../DatabaseUtils/LabSheetKeys.dart';
 import '../DatabaseUtils/keys.dart';
 import '../Model/Client.dart';
 import '../Model/Doctor.dart';
@@ -17,7 +24,8 @@ import 'ProfileScreen.dart';
 
 class ShareScreen extends StatefulWidget {
   static String id="share screen";
-  const ShareScreen({Key? key}) : super(key: key);
+  String patientId="";
+   ShareScreen({Key? key}) : super(key: key);
 
   @override
   State<ShareScreen> createState() => _ShareScreenState();
@@ -57,8 +65,63 @@ class _ShareScreenState extends State<ShareScreen> {
 
   List<Doctor> doctorList=List.empty(growable: true);
 
+
+shareAllData(Doctor doctor){
+
+  shareData(doctor, OncoSheetKeys.table);
+  shareData(doctor, VitalsSheetKey.table);
+  shareData(doctor, MedSheetKey.table);
+  shareData(doctor, NotesSheetKeys.table);
+  shareData(doctor, InterventionSheetKeys.table);
+  shareData(doctor, LabSheetKeys.table);
+  shareData(doctor, ADMSheetKeys.table);
+
+
+  showToast("Data shared Successfully");
+
+}
+
+  shareData(Doctor doctor,String tableName)async{
+    var snapshot = await FirebaseFirestore.instance.collection(tableName).get();
+
+    var rowsBackend = snapshot.docs.where((element) => element['user'] == client.token &&
+        element['hCode'] == widget.patientId) ;
+
+
+    // var rowsBackend = snapshot.data?.docs.where((element) =>
+    // element['user'] == doctor.token &&
+    //     element['hCode'] == widget.patientId);
+    print("row data from share :${doctor.token} and ${doctor.name} and patient ${widget.patientId}");
+
+    for (var row in rowsBackend) {
+      Map<String, dynamic> rowData = row.data();
+      rowData['user']=doctor.token;
+
+      print("row data from share : ${rowData['user']}");
+
+      FirebaseFirestore.instance
+          .collection(tableName)
+          .add(rowData);
+    }
+
+
+  }
+
+
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as PatientArguments;
+    widget.patientId=args.code;
     return StreamBuilder(
         stream: FirebaseFirestore.instance.collection(Keys.CLIENT_DB).snapshots(),
 
@@ -70,7 +133,7 @@ class _ShareScreenState extends State<ShareScreen> {
             );
           }
 
-          var checkedValue= snapshot.data?.docs;
+          var checkedValue= snapshot.data?.docs.where((element) => element['token']!=client.token);
 
           if(checkedValue!=null) {
             for (var row in checkedValue) {
@@ -132,6 +195,7 @@ class _ShareScreenState extends State<ShareScreen> {
             ),
             body: Container(
               margin: EdgeInsets.only(top: 20,left: 8,right: 8,bottom: 8),
+              height: MediaQuery.of(context).size.height*0.9,
               child: ListView.builder(
                 itemCount: checkedValue.length,
                 controller: controller,
@@ -151,6 +215,7 @@ class _ShareScreenState extends State<ShareScreen> {
                         onTap: ()async{
                           final ConfirmAction action = (await _asyncConfirmDialog(context)) as ConfirmAction;
                           print("Confirm Action $action" );
+                          shareAllData(doctorList[index]);
                           },
                         child: Card(
                             shape: RoundedRectangleBorder(

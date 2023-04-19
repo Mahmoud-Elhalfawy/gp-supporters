@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/BookScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/CNSScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/CardiologyScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/DermatologyScreen.dart';
@@ -7,6 +8,7 @@ import 'package:gppsupporters/View/GuidelinesScreens/GuidelineOptionCard.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/HepatologyScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/ImmunologyScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/NerphologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/NutritionScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/OncologyScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -197,6 +199,14 @@ class _GuidelinesOptionsScreenState extends State<GuidelinesOptionsScreen> {
   }
 
   buildCards() {
+
+    calculators.add(
+      GuidelineOptionCard(
+        title: "Nutrition",
+        url: NutritionScreen.id,
+        img: 'assets/img/nutrition.png',
+      ),
+    );
     calculators.add(
       GuidelineOptionCard(
         title: "Cardiology",

@@ -23,6 +23,7 @@ class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
   static String id="profile";
   static String code='';
+  static String name='';
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -37,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     final args = ModalRoute.of(context)!.settings.arguments as PatientArguments;
     ProfileScreen.code=args.code;
+    ProfileScreen.name=args.name;
     return DefaultTabController(
         length: 8,
         child: Scaffold(
@@ -123,15 +125,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             margin: EdgeInsets.all(15),
             child:  TabBarView(
               children: [
-               ADMScreen(code: ProfileScreen.code),
-                LabsScreen(code: ProfileScreen.code),
-                MedScreen(code: ProfileScreen.code,),
-                VitalsScreen(code: ProfileScreen.code),
-                OncoScreen(code: ProfileScreen.code),
+               ADMScreen(code: ProfileScreen.code, name : ProfileScreen.name),
+                LabsScreen(code: ProfileScreen.code, name : ProfileScreen.name),
+                MedScreen(code: ProfileScreen.code,name : ProfileScreen.name),
+                VitalsScreen(code: ProfileScreen.code, name : ProfileScreen.name),
+                OncoScreen(code: ProfileScreen.code, name : ProfileScreen.name),
 
                 Icon(Icons.downloading),
-                NotesScreen(code: ProfileScreen.code,),
-                InterventionScreen(code: ProfileScreen.code,),
+                NotesScreen(code: ProfileScreen.code,name : ProfileScreen.name),
+                InterventionScreen(code: ProfileScreen.code,name : ProfileScreen.name),
 
 
               ],

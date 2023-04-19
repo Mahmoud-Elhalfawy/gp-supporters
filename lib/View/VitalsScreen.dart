@@ -16,7 +16,8 @@ import '../Model/Client.dart';
 class VitalsScreen extends StatefulWidget {
   static String id="vitals";
   String code;
-   VitalsScreen({Key? key, required this.code}) : super(key: key);
+  String name;
+   VitalsScreen({Key? key, required this.code,required this.name}) : super(key: key);
 
   @override
   State<VitalsScreen> createState() => _VitalsScreenState();
@@ -93,7 +94,9 @@ class _VitalsScreenState extends State<VitalsScreen> {
       sheet.getRangeByIndex(row, col).setText(column['title']);
       col++;
     }
+    sheet.getRangeByIndex(row, col).setText("patient name");
 
+    sheet.getRangeByIndex(2, col).setText(widget.name);
     row=row+1;
     for(var rowV in returnedRows){
       col=1;

@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gppsupporters/View/AboutusScreen.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
+import 'package:gppsupporters/View/DrugNarrativeScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/BookScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/GuidelineView.dart';
 import 'package:gppsupporters/View/LoginScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
@@ -139,7 +141,13 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                   ],
                 ),
-
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 70),
+                  child: Divider(
+                    color: Colors.grey.shade500,
+                    thickness: 2,
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.min,
@@ -151,8 +159,12 @@ class _DashboardViewState extends State<DashboardView> {
                         Navigator.pushNamed(context, DDIScreen.id);
                       },
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+
                         children: [
-                          Text("DDI", style: TextStyle(color: Colors.black, fontSize: 20),),
+                          Text("DDI", style: TextStyle(color: Colors.black, fontSize: 16),),
+                          SizedBox(height: 5,),
+
                           Image.asset('assets/img/drug.png',width: 45,height: 45,)
                           ,
                         ],
@@ -167,7 +179,56 @@ class _DashboardViewState extends State<DashboardView> {
                         foregroundColor: Colors.blue.shade900, // <-- Splash color
                       ),
                     ),
+                    ElevatedButton(
+                      onPressed: () {
 
+                        Navigator.pushNamed(context, DrugNarrativeScreen.id);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Drug Narrative", style: TextStyle(color: Colors.black, fontSize: 15),),
+                          SizedBox(height: 5,),
+
+                          Image.asset('assets/img/pharmacy.png',width: 45,height: 45,)
+                          ,
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(0,110),
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                        ),
+                        padding: EdgeInsets.all(20),
+                        backgroundColor: Colors.white, // <-- Button color
+                        foregroundColor: Colors.blue.shade900, // <-- Splash color
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+
+                        Navigator.pushNamed(context, BookScreen.id);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Book Stock", style: TextStyle(color: Colors.black, fontSize: 15),),
+                          SizedBox(height: 5,),
+                          Image.asset('assets/img/bookstack.png',width: 45,height: 45,)
+                          ,
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(130,110),
+                        maximumSize: Size(130,110),
+
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(20),
+                        backgroundColor: Colors.white, // <-- Button color
+                        foregroundColor: Colors.blue.shade900, // <-- Splash color
+                      ),
+                    ),
                     // ElevatedButton(
                     //   onPressed: () {},
                     //   child: Column(
@@ -191,6 +252,17 @@ class _DashboardViewState extends State<DashboardView> {
 
                   ],
                 ),
+
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+
+                  child: Divider(
+
+                    color: Colors.grey.shade500,
+                    thickness: 2,
+                  ),
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   mainAxisSize: MainAxisSize.min,

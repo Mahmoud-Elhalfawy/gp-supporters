@@ -20,7 +20,8 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart' as Excel;
 class INTRVCard extends StatefulWidget {
   String code;
   int intrvIndex;
-  INTRVCard({Key? key,required this.code,required this.intrvIndex}) : super(key: key);
+  String name;
+  INTRVCard({Key? key,required this.code,required this.intrvIndex, required this.name}) : super(key: key);
 
   @override
   State<INTRVCard> createState() => _INTRVCardState();
@@ -53,6 +54,10 @@ class _INTRVCardState extends State<INTRVCard> {
       sheet.getRangeByIndex(row, col).setText(title);
       col++;
     }
+
+    sheet.getRangeByIndex(row, col).setText("patient name");
+
+    sheet.getRangeByIndex(2, col).setText(widget.name);
 
     row = row + 1;
 

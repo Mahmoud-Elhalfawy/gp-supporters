@@ -12,8 +12,9 @@ import '../Model/Client.dart';
 class OncoScreen extends StatefulWidget {
   static String id = "onco";
   String code;
+  String name;
 
-  OncoScreen({Key? key, required this.code}) : super(key: key);
+  OncoScreen({Key? key, required this.code,required this.name}) : super(key: key);
 
   @override
   State<OncoScreen> createState() => _OncoScreenState();
@@ -169,7 +170,7 @@ class _OncoScreenState extends State<OncoScreen> {
         height: 15,
       ));
 
-      cycles.add(OncoTable(code: widget.code, tableIndex: index));
+      cycles.add(OncoTable(code: widget.code, tableIndex: index, name: widget.name,));
 
       cycles.add(const SizedBox(
         height: 20,

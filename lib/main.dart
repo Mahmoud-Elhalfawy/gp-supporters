@@ -7,6 +7,8 @@ import 'package:gppsupporters/Model/Rheumatology.dart';
 import 'package:gppsupporters/Utils/LabKeys.dart';
 import 'package:gppsupporters/Utils/LabsTable.dart';
 import 'package:gppsupporters/View/AboutusScreen.dart';
+import 'package:gppsupporters/View/DrugNarrativeScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/BookScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/CNSScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/CardiologyScreen.dart';
 import 'package:gppsupporters/View/DDIScreen.dart';
@@ -18,6 +20,7 @@ import 'package:gppsupporters/View/GuidelinesScreens/GuidelineView.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/GuildelinesOptionsScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/HepatologyScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/ImmunologyScreen.dart';
+import 'package:gppsupporters/View/GuidelinesScreens/NutritionScreen.dart';
 import 'package:gppsupporters/View/MedicalCalculatorScreen.dart';
 import 'package:gppsupporters/View/GuidelinesScreens/NerphologyScreen.dart';
 import 'package:gppsupporters/View/NewProfileScreen.dart';
@@ -95,8 +98,8 @@ class MyApp extends StatelessWidget {
           GuidelineView.id:(context)=>GuidelineView(),
           ProfileScreen.id:(context)=>ProfileScreen(),
           PatientsScreen.id:(context)=>PatientsScreen(),
-          VitalsScreen.id:(context)=>VitalsScreen(code: '',),
-          OncoScreen.id:(context)=>OncoScreen(code: ''),
+          VitalsScreen.id:(context)=>VitalsScreen(code: '', name: '',),
+          OncoScreen.id:(context)=>OncoScreen(code: '', name: '',),
           NewProfileScreen.id:(context)=>NewProfileScreen(),
           LoginScreen.id:(context)=> LoginScreen(),
           SignupScreen.id:(context)=> SignupScreen(),
@@ -114,7 +117,9 @@ class MyApp extends StatelessWidget {
           GeriatricsScreen.id:(context)=>GeriatricsScreen(),
           GastroenterologyScreen.id:(context)=>GastroenterologyScreen(),
           NephrologyScreen.id:(context)=>NephrologyScreen(),
-
+          BookScreen.id:(context)=>BookScreen(),
+          NutritionScreen.id:(context)=>NutritionScreen(),
+          DrugNarrativeScreen.id:(context)=>DrugNarrativeScreen(),
           CelebrateScreen.id:(context)=>CelebrateScreen(),
           AboutusScreen.id:(context)=>AboutusScreen(),
           //   CheckPatientScreen.id:(context)=>CheckPatientScreen(),

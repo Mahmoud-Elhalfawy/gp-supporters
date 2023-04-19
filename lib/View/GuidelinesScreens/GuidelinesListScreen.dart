@@ -5,11 +5,13 @@ import 'package:gppsupporters/Model/Endocrinology.dart';
 import 'package:gppsupporters/Model/Endocrinology.dart';
 import 'package:gppsupporters/Model/Immunology.dart';
 import 'package:gppsupporters/Model/Immunology.dart';
+import 'package:gppsupporters/Model/Nutrition.dart';
 import 'package:gppsupporters/Model/Oncology.dart';
 import 'package:gppsupporters/Model/Oncology.dart';
 import 'package:gppsupporters/Model/Rheumatology.dart';
 import 'package:gppsupporters/View/CardView.dart';
 
+import '../../Model/BookStock.dart';
 import '../../Model/CNS.dart';
 import '../../Model/Gastroenology.dart';
 import '../../Model/Geriatrics.dart';
@@ -144,101 +146,120 @@ class _GuidelinesListScreenState extends State<GuidelinesListScreen> {
     );
   }
 
-  buildCards(){
+  buildCards() {
+    if (widget.type == "cardiology") {
+      Cardiology cardioModel = Cardiology();
+      List<GuidelineCard> cards = cardioModel.cardioMap[widget.subType]!;
 
-
-    if(widget.type=="cardiology"){
-      Cardiology cardioModel=Cardiology();
-      List<GuidelineCard> cards=cardioModel.cardioMap[widget.subType]!;
-
-      for(GuidelineCard cardioCard in cards){
-        calculators.add(CardView(title: cardioCard.title, url: cardioCard.url,icon: 'assets/img/cardiology.png',),);
-
+      for (GuidelineCard cardioCard in cards) {
+        calculators.add(CardView(title: cardioCard.title,
+          url: cardioCard.url,
+          icon: 'assets/img/cardiology.png',),);
       }
-    }else if(widget.type=="hepatology"){
-      Hepatology hepaModel=Hepatology();
-      List<GuidelineCard> cards=hepaModel.hepaMap[widget.subType]!;
+    } else if (widget.type == "hepatology") {
+      Hepatology hepaModel = Hepatology();
+      List<GuidelineCard> cards = hepaModel.hepaMap[widget.subType]!;
 
-      for(GuidelineCard hepaCard in cards){
-        calculators.add(CardView(title: hepaCard.title, url: hepaCard.url,icon: 'assets/img/hepatology.png',),);
-
+      for (GuidelineCard hepaCard in cards) {
+        calculators.add(CardView(title: hepaCard.title,
+          url: hepaCard.url,
+          icon: 'assets/img/hepatology.png',),);
       }
-    }else if(widget.type=="immunology"){
-      Immunology immunoModel=Immunology();
-      List<GuidelineCard> cards=immunoModel.immunoMap[widget.subType]!;
+    } else if (widget.type == "immunology") {
+      Immunology immunoModel = Immunology();
+      List<GuidelineCard> cards = immunoModel.immunoMap[widget.subType]!;
 
-      for(GuidelineCard immunoCard in cards){
-        calculators.add(CardView(title: immunoCard.title, url: immunoCard.url,icon: 'assets/img/antibodies.png',),);
-
+      for (GuidelineCard immunoCard in cards) {
+        calculators.add(CardView(title: immunoCard.title,
+          url: immunoCard.url,
+          icon: 'assets/img/antibodies.png',),);
       }
-    }else if(widget.type=="cns"){
-      CNS cnsModel=CNS();
-      List<GuidelineCard> cards=cnsModel.cnsMap[widget.subType]!;
+    } else if (widget.type == "cns") {
+      CNS cnsModel = CNS();
+      List<GuidelineCard> cards = cnsModel.cnsMap[widget.subType]!;
 
-      for(GuidelineCard cnsCard in cards){
-        calculators.add(CardView(title: cnsCard.title, url: cnsCard.url,icon: 'assets/img/brain.png',),);
-
+      for (GuidelineCard cnsCard in cards) {
+        calculators.add(CardView(title: cnsCard.title,
+          url: cnsCard.url,
+          icon: 'assets/img/brain.png',),);
       }
-    }else if(widget.type=="endocrinology"){
-      Endocrinology endoModel=Endocrinology();
-      List<GuidelineCard> cards=endoModel.endoMap[widget.subType]!;
+    } else if (widget.type == "endocrinology") {
+      Endocrinology endoModel = Endocrinology();
+      List<GuidelineCard> cards = endoModel.endoMap[widget.subType]!;
 
-      for(GuidelineCard endoCard in cards){
-        calculators.add(CardView(title: endoCard.title, url: endoCard.url,icon: 'assets/img/thyroid.png',),);
-
+      for (GuidelineCard endoCard in cards) {
+        calculators.add(CardView(title: endoCard.title,
+          url: endoCard.url,
+          icon: 'assets/img/thyroid.png',),);
       }
-    }else if(widget.type=="oncology"){
-      Oncology model=Oncology();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "oncology") {
+      Oncology model = Oncology();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/oncology.png',),);
-
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(
+          title: card.title, url: card.url, icon: 'assets/img/oncology.png',),);
       }
-    }else if(widget.type=="dermatology"){
-      Dermatology model=Dermatology();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "dermatology") {
+      Dermatology model = Dermatology();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/spots.png',),);
-
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(
+          title: card.title, url: card.url, icon: 'assets/img/spots.png',),);
       }
-    }else if(widget.type=="rheumatology"){
-      Rheumatology model=Rheumatology();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "rheumatology") {
+      Rheumatology model = Rheumatology();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/arthritis.png',),);
-
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(title: card.title,
+          url: card.url,
+          icon: 'assets/img/arthritis.png',),);
       }
-    }else if(widget.type=="geriatrics"){
-      Geriatrics model=Geriatrics();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "geriatrics") {
+      Geriatrics model = Geriatrics();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/geriatrics.png',),);
-
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(title: card.title,
+          url: card.url,
+          icon: 'assets/img/geriatrics.png',),);
       }
-    }else if(widget.type=="Gastroenterology"){
-      Gastroenterology model=Gastroenterology();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "Gastroenterology") {
+      Gastroenterology model = Gastroenterology();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/gastroenterology.png',),);
-
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(title: card.title,
+          url: card.url,
+          icon: 'assets/img/gastroenterology.png',),);
       }
-    }else if(widget.type=="Nephrology"){
-      Nephrology model=Nephrology();
-      List<GuidelineCard> cards=model.map[widget.subType]!;
+    } else if (widget.type == "Nephrology") {
+      Nephrology model = Nephrology();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
-      for(GuidelineCard card in cards){
-        calculators.add(CardView(title: card.title, url: card.url,icon: 'assets/img/kidney.png',),);
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(
+          title: card.title, url: card.url, icon: 'assets/img/kidney.png',),);
+      }
+    } else if (widget.type == "nutrition") {
+      Nutrition model = Nutrition();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
 
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(
+          title: card.title, url: card.url, icon: 'assets/img/nutrition.png',),);
+      }
+    }else if (widget.type == "book") {
+      BookStock model = BookStock();
+      List<GuidelineCard> cards = model.map[widget.subType]!;
+
+      for (GuidelineCard card in cards) {
+        calculators.add(CardView(
+          title: card.title, url: card.url, icon: 'assets/img/shelf.png',),);
       }
     }
-
-
-
   }
 }
 

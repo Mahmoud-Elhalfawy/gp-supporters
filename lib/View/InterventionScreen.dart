@@ -12,7 +12,9 @@ import 'ProfileScreen.dart';
 
 class InterventionScreen extends StatefulWidget {
   String code;
-  InterventionScreen({Key? key,required this.code}) : super(key: key);
+  String name;
+
+  InterventionScreen({Key? key,required this.code,required this.name}) : super(key: key);
 
   @override
   State<InterventionScreen> createState() => _InterventionScreenState();
@@ -132,7 +134,7 @@ class _InterventionScreenState extends State<InterventionScreen> {
       height: 15,
     ));
 
-    cycles.add(INTRVCard(code: widget.code, intrvIndex: index));
+    cycles.add(INTRVCard(code: widget.code, intrvIndex: index, name: widget.name));
 
     cycles.add(const SizedBox(
       height: 20,

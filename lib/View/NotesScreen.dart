@@ -24,8 +24,9 @@ import 'ProfileScreen.dart';
 
 class NotesScreen extends StatefulWidget {
   String code;
+  String name;
 
-  NotesScreen({Key? key,required this.code}) : super(key: key);
+  NotesScreen({Key? key,required this.code,required this.name}) : super(key: key);
 
   @override
   State<NotesScreen> createState() => _NotesScreenState();
@@ -145,7 +146,7 @@ class _NotesScreenState extends State<NotesScreen> {
       height: 15,
     ));
 
-    cycles.add(NoteCard(code: widget.code, noteIndex: index));
+    cycles.add(NoteCard(code: widget.code, noteIndex: index, name: widget.name));
 
     cycles.add(const SizedBox(
       height: 20,
